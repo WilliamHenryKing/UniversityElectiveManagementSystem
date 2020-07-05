@@ -6,6 +6,8 @@ package za.ac.cput.elective.entity;
  * Date: 07 July 2020
  */
 
+//Mark.java 
+
 public class Mark
 {
     private String marksID;
