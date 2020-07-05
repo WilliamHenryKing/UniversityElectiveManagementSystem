@@ -4,7 +4,7 @@ import java.util.*;
 
 /*
  * @author: Ridhaa Hendricks, GitHub: ridhaahendricks
- * Desc: Create Faculty.java class with attributes using the Builder pattern
+ * Desc: Created Faculty.java class with attributes using the Builder pattern
  * Date: 3rd July 2020
 */
 
@@ -23,7 +23,7 @@ public class Faculty {
         private int facultyID;
         private String facultyName;
 
-        private Builder() {
+        public Builder() {
         }
 
         public Builder setFacultyID(int facultyID) {
@@ -58,5 +58,4 @@ public class Faculty {
                 ", facultyName='" + facultyName + '\'' +
                 '}';
     }
-
 }
