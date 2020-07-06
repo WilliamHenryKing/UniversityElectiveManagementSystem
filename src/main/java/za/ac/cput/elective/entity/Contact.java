@@ -1,5 +1,11 @@
 package za.ac.cput.elective.entity;
 
+/**
+ * @author @WilliamHenryKing
+ * Desc: Entity for Contact
+ * Date: 2020/07/05
+ **/
+
 public class Contact {
 
     private String emailAdd;
