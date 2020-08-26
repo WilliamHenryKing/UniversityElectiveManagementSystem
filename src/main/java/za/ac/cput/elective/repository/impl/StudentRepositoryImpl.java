@@ -16,7 +16,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     private static StudentRepository studentRepository = null;
     private Set<Student> studentDB;
 
-    private StudentRepositoryImpl() {
+    StudentRepositoryImpl() {
 
         this.studentDB = new HashSet<>();
 
@@ -37,15 +37,39 @@ public class StudentRepositoryImpl implements StudentRepository {
         return s;
     }
 
-    public Student read (String id) {
+    @Override
+    public Student read (String s) {
 
+        Student student = this.studentDB.stream().filter(x -> x.getStudentID().trim().equalsIgnoreCase(s)).findAny().orElse(null);
+        return student;
 
     }
 
+    @Override
     public Student update (Student s) {
+        if(!delete(s.getStudentID())) {
+            this.studentDB.add(s);
+            return s;
+        }
 
-        boolean deleteStudent = delete(s.getStudentID().toString());
+        return null;
     }
+
+    @Override
+    public boolean delete (String s) {
+        Student st = read(s);
+
+        if (st != null) {
+            this.studentDB.remove(st);
+            return true;
+        }
+
+        else {
+            return false;
+        }
+
+    }
+
     @Override
     public Set<Student> getAll() {
 
