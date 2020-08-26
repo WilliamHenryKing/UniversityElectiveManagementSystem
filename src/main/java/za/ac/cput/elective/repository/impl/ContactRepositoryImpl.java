@@ -7,6 +7,12 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * @author @WilliamHenryKing
+ * Desc: Implementation for ContactRepository
+ * Date: 2020/08/26
+ **/
+
 public class ContactRepositoryImpl implements ContactRepository {
 
     private static ContactRepository contactRepository = null;
