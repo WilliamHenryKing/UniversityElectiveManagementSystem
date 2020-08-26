@@ -2,7 +2,7 @@ package za.ac.cput.elective.entity;
 
 import java.util.*;
 
-/*
+/**
  * @author: Ridhaa Hendricks, GitHub: ridhaahendricks
  * Desc: Created Faculty.java class with attributes using the Builder pattern
  * Date: 3rd July 2020
@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Faculty {
 
-    private int facultyID;
+    private String facultyID;
     private String facultyName;
 
     private Faculty(Builder builder) {
@@ -20,13 +20,13 @@ public class Faculty {
 
     public static class Builder {
 
-        private int facultyID;
+        private String facultyID;
         private String facultyName;
 
         public Builder() {
         }
 
-        public Builder setFacultyID(int facultyID) {
+        public Builder setFacultyID(String facultyID) {
             this.facultyID = facultyID;
             return this;
         }
@@ -39,7 +39,7 @@ public class Faculty {
         public Faculty build() {return new Faculty(this);}
     }
 
-    public int getFacultyID() {return facultyID;}
+    public String getFacultyID() {return facultyID;}
 
     public String getFacultyName() {return facultyName;}
 
