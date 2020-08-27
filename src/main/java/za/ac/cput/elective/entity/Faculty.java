@@ -36,6 +36,12 @@ public class Faculty {
             return this;
         }
 
+        public Builder copy(Faculty fac){
+            this.facultyID = fac.facultyID;
+            this.facultyName = fac.facultyName;
+            return this;
+        }
+
         public Faculty build() {return new Faculty(this);}
     }
 
