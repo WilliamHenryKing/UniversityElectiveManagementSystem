@@ -40,18 +40,21 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public Student read (String s) {
 
-        Student student = this.studentDB.stream().filter(x -> x.getStudentID().trim().equalsIgnoreCase(s)).findAny().orElse(null);
-        return student;
+        for (Student student : this.studentDB) {
+            if (student.getStudentID().equalsIgnoreCase(s)) {
+                return student;
+            }
 
+        }
+        return null;
     }
 
     @Override
     public Student update (Student s) {
-        if(!delete(s.getStudentID())) {
+        boolean deleteStudent = delete(s.getStudentID());
+        if (deleteStudent) {
             this.studentDB.add(s);
-            return s;
         }
-
         return null;
     }
 
