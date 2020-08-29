@@ -2,17 +2,16 @@ package za.ac.cput.elective.factory;
 
 import za.ac.cput.elective.entity.Elective;
 
-import java.util.UUID;
-
+import java.util.*;
 public class ElectiveFactory {
 
 
-    public static Elective createElective(long electCode, String electName) {
-        String electDesc = UUID.randomUUID().toString();
+    public static Elective createElective(String electName, String electDesc) {
+        String electCode = UUID.randomUUID().toString();
         Elective elect = new Elective.Builder()
-                .setElectName(electDesc)
-                .setElectCode(electCode)
+                .setElectName(electCode)
                 .setElectName(electName)
+                .setElectDesc(electDesc)
                 .build();
         return elect;
     }
