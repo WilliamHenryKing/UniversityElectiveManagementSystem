@@ -13,9 +13,9 @@ public class ElectiveFactoryTest {
     public void createElective() {
         ElectiveFactory ef = new ElectiveFactory();
 
-        Elective elec = ElectiveFactory.createElective(3665, "Business Analysis");
-        Assert.assertEquals(3665, elec.getElectCode());
-        Assert.assertEquals("Business Analysis", elec.getElectName());
-
+        Elective elec = ef.createElective("PHP", "Similar to Java, Just done in a HTML environment");
+        Assert.assertEquals("PHP", elec.getElectName());
+       Assert.assertEquals("Similar to Java, Just done in a HTML environment", elec.getElectDesc());
     }
+
 }
