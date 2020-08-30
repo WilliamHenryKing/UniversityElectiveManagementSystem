@@ -1,5 +1,12 @@
 package za.ac.cput.elective.repository.impl;
 
+/**
+ * @author: Ridhaa Hendricks 218120966, GitHub: ridhaahendricks
+ * Desc: Create class for FacultyRepositoryImpl that implements FacultyRepository,
+         containing the logic of the CRUD methods
+ * Date: 30 August 2020
+ **/
+
 import za.ac.cput.elective.entity.Faculty;
 import za.ac.cput.elective.repository.FacultyRepository;
 
