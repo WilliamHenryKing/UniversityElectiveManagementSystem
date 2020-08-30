@@ -59,9 +59,9 @@ public class Faculty {
 
     @Override
     public String toString() {
-        return "Faculty{" +
-                "facultyID=" + facultyID +
-                ", facultyName='" + facultyName + '\'' +
+        return "Faculty {" +
+                "Faculty ID = " + facultyID +
+                ", Faculty Name = '" + facultyName + '\'' +
                 '}';
     }
 }

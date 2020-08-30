@@ -24,7 +24,7 @@ public class FacultyRepositoryImplTest {
     @Test
     public void b_read() {
         Faculty found = facuRepo.read(facu.getFacultyID());
-        System.out.println(found.getFacultyID());
+        System.out.println("Faculty ID: " + found.getFacultyID() + ", Faculty Name: " + found.getFacultyName());
     }
 
     @Test
@@ -38,10 +38,15 @@ public class FacultyRepositoryImplTest {
     public void e_delete() {
         boolean removed = facuRepo.delete(facu.getFacultyID());
         Assert.assertTrue(removed);
+        if (removed = true ){
+            System.out.println("Removed? Yes");
+        } else {
+            System.out.println("Removed? No");
+        }
     }
     
     @Test
     public void d_getAll() {
-        System.out.println("Get All: " + facuRepo.getAll());
+        System.out.println("Display All: " + facuRepo.getAll());
     }
 }
