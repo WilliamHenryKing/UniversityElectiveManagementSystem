@@ -7,7 +7,7 @@ Author: Sean Trainor 218060033
 public class Student {
     private int year;
     private String stream;
-    private int studentID;
+    private String studentID;
 
 
     private Student(Builder b) {
@@ -17,7 +17,7 @@ public class Student {
 
     }
 
-    public int getStudentID() {
+    public String getStudentID() {
         return studentID;
     }
 
@@ -40,11 +40,11 @@ public class Student {
 
     public static class Builder {
 
-        private int studentID;
+        private String studentID;
         private int year;
         private String stream;
 
-        public Builder setStudentID(int studentID) {
+        public Builder setStudentID(String studentID) {
             this.studentID = studentID;
             return this;
         }
