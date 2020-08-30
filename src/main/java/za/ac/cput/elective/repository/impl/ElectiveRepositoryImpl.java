@@ -7,7 +7,7 @@ import za.ac.cput.elective.repository.ElectiveRepository;
 
 import java.util.*;
 
-public class ElectiveRepositoryImpl implements ElectiveRepository{
+public class  ElectiveRepositoryImpl implements ElectiveRepository{
 
     private Set<Elective> electiveDB;
 
