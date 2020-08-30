@@ -14,7 +14,7 @@ public class AdminFactoryTest {
 
     @Test
     public void buildAdmin() {
-        Admin admin = AdminFactory.buildAdmin(123,"Ronald");
+        Admin admin = AdminFactory.buildAdmin("123","Ronald");
         Assert.assertNotEquals(admin.getAdminID(),321);
     }
 }
