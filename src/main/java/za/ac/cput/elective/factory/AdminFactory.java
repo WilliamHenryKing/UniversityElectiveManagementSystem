@@ -10,7 +10,7 @@ import za.ac.cput.elective.entity.Admin;
 
 public class AdminFactory {
 
-    public static Admin buildAdmin(int id, String name){
+    public static Admin buildAdmin(String id, String name){
         return new Admin.AdminBuilder().setAdminID(id).setAdminName(name).build();
 
     } //end of buildAdmin
