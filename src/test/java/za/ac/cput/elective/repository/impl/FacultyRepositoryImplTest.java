@@ -1,5 +1,12 @@
 package za.ac.cput.elective.repository.impl;
 
+/**
+ * @author: Ridhaa Hendricks 218120966, GitHub: ridhaahendricks
+ * Desc: Create class for FacultyRepositoryImplTest which will test all the methods
+         within the FacultyRepositoryImpl to ensure correct outcomes.
+ * Date: 30 August 2020
+ **/
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

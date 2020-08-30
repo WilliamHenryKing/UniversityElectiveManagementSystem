@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * @author: Ridhaa Hendricks 218120966, GitHub: ridhaahendricks
  * Desc: Create Interface for FacultyRepository from Repository
- * Date: 3rd July 2020
+ * Date: 27th August 2020
  **/
 
 public interface FacultyRepository extends IRepository<Faculty, String>{
