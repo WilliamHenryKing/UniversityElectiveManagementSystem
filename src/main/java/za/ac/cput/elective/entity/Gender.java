@@ -64,9 +64,8 @@ public class Gender {
 
     @Override
     public String toString() {
-        return "Gender" +
-                "\nGenderID: " + getGenderID() +
-                "\nGender: '" + getGenderDesc();
+        return "\nGenderID: " + getGenderID() +
+                "\nGender: '" + getGenderDesc() + "'";
     }
 
 }
