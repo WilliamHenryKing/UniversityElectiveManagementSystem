@@ -3,7 +3,7 @@ import za.ac.cput.elective.entity.Room;
 import za.ac.cput.elective.repository.RoomRepository;
 /**
  * @author Sinethemba Poni
- * Desc: Implementation for the RoomRepository.
+ * Desc: Implementation for the RoomRepository..
  * Date: 2020/08/27
  **/
 import java.util.HashSet;
