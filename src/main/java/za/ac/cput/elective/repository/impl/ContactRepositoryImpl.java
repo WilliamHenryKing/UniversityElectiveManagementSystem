@@ -18,16 +18,17 @@ public class ContactRepositoryImpl implements ContactRepository {
     private static ContactRepository contactRepository = null;
     private Set<Contact> contactSet;
 
-    private ContactRepositoryImpl() {
-
+    private ContactRepositoryImpl()
+    {
         this.contactSet = new HashSet<>();
-
     }
 
-    public static ContactRepository getContactRepository() {
+    public static ContactRepository getContactRepository()
+    {
 
         Optional.ofNullable(contactRepository)
-                .ifPresentOrElse(x -> {
+                .ifPresentOrElse(x ->
+                {
                 }, (Runnable) (contactRepository = new ContactRepositoryImpl()));
 
         return contactRepository;
@@ -35,7 +36,8 @@ public class ContactRepositoryImpl implements ContactRepository {
     }
 
     @Override
-    public Contact create(Contact contact) {
+    public Contact create(Contact contact)
+    {
         this.contactSet.add(contact);
         return contact;
     }
