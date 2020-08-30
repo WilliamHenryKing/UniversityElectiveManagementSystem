@@ -1,5 +1,9 @@
 package za.ac.cput.elective.repository.impl;
-
+/*
+ * @author: Shane  Mapasie, GitHub: SPMapasie216182425
+ * Desc: ElectiveRepository implementing from the Interface Repository.
+ * Date: 31st August 2020
+ */
 import org.junit.Test;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
