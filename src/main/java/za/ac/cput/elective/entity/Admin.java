@@ -6,7 +6,7 @@ package za.ac.cput.elective.entity;
  */
 
 public class Admin {
-    private long adminID;
+    private String adminID;
     private String adminName;
 
     public Admin(AdminBuilder builder) {
@@ -26,7 +26,7 @@ public class Admin {
 
     // getters
 
-    public long getAdminID() {
+    public String getAdminID() {
         return adminID;
     }
 
@@ -38,12 +38,12 @@ public class Admin {
     // builder class
 
     public static class AdminBuilder{
-        private long adminID;
+        private String adminID;
         private String adminName;
 
         // setters
 
-        public AdminBuilder setAdminID(long adminID) {
+        public AdminBuilder setAdminID(String adminID) {
             this.adminID = adminID;
             return this;
         }
