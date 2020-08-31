@@ -2,7 +2,6 @@ package za.ac.cput.elective.repository.impl;
 
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.repository.ContactRepository;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -25,14 +24,11 @@ public class ContactRepositoryImpl implements ContactRepository {
 
     public static ContactRepository getContactRepository()
     {
-
-        Optional.ofNullable(contactRepository)
-                .ifPresentOrElse(x ->
-                {
-                }, (Runnable) (contactRepository = new ContactRepositoryImpl()));
+        if (contactRepository == null){
+            contactRepository = new ContactRepositoryImpl();
+        }
 
         return contactRepository;
-
     }
 
     @Override
