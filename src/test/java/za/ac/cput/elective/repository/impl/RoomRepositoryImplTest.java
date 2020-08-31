@@ -54,7 +54,7 @@ public class RoomRepositoryImplTest {
     }
 
     @Test
-    public void f_getAll() {
+    public void d_getAll() {
         System.out.println("Get all:" +roomRepository.getAll());
     }
 }
