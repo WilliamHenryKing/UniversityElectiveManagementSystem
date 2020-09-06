@@ -9,9 +9,19 @@ import java.util.Set;
 
 public class AdminRepositoryImpl implements AdminRepository {
     private Set<Admin> adminDB;
+    private static AdminRepository adminRepository = null;
+
 
     public AdminRepositoryImpl() {
         this.adminDB = new HashSet<>();
+    }
+
+
+    public static AdminRepository getAdminRepository() {
+
+        if (adminRepository == null) adminRepository = new AdminRepositoryImpl();
+        return adminRepository;
+
     }
 
     // Create Admin
