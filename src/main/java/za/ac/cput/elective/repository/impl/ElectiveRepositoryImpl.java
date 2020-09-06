@@ -2,18 +2,26 @@ package za.ac.cput.elective.repository.impl;
 
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.repository.ElectiveRepository;
-//import za.ac.cput.elective.repository.Repository;
-
 
 import java.util.*;
 
+
+
 public class  ElectiveRepositoryImpl implements ElectiveRepository{
 
+    private static ElectiveRepository eRepo = null;
     private Set<Elective> electiveDB;
 
     /*CONSTRUCTOR*/
     public ElectiveRepositoryImpl() {
         this.electiveDB = new HashSet<>();
+    }
+    public static ElectiveRepository getRepository(){
+        if (eRepo == null){
+            eRepo = new ElectiveRepositoryImpl();
+        }
+
+        return eRepo;
     }
 
     /*create, read, update, and delete methods*/
