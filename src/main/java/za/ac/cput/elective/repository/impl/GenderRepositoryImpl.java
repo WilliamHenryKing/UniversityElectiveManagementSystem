@@ -4,9 +4,7 @@ package za.ac.cput.elective.repository.impl;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.repository.GenderRepository;
 
-import javax.swing.*;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -43,13 +41,12 @@ public class GenderRepositoryImpl implements GenderRepository {
 
     @Override
     public Gender read(Character c) {
-        Gender gender = this.genderSet
+
+        return this.genderSet
                 .stream()
                 .filter(x -> x.getGenderID() == c)
                 .findAny()
                 .orElse(null);
-
-        return gender;
     }
 
     @Override
