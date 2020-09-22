@@ -8,11 +8,11 @@ import za.ac.cput.elective.service.impl.ContactServiceImpl;
 
 import java.util.Set;
 
-@RestController
-@RequestMapping("/contact")
+//@RestController
+//@RequestMapping("/contact")
 public class ContactController {
 
-    @Autowired
+//    @Autowired
     private ContactServiceImpl contactService;
 
     @PostMapping("/create")
@@ -34,7 +34,7 @@ public class ContactController {
 
     @GetMapping("/update")
     public Contact update(@RequestBody Contact contact) {
-        return contactService.update(contact)
+        return contactService.update(contact);
     }
 
     @GetMapping("/all")
