@@ -14,7 +14,8 @@ import java.util.Set;
  * Date: 2020/09/04
  **/
 
-    @Service
+
+@Service
 public class ContactServiceImpl implements ContactService {
 
     private static ContactService contactService = null;
