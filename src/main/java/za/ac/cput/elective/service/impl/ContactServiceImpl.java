@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.repository.ContactRepository;
 import za.ac.cput.elective.repository.impl.ContactRepositoryImpl;
@@ -13,6 +14,7 @@ import java.util.Set;
  * Date: 2020/09/04
  **/
 
+    @Service
 public class ContactServiceImpl implements ContactService {
 
     private static ContactService contactService = null;

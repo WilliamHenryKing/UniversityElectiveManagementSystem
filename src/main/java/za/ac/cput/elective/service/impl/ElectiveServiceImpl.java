@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.repository.ElectiveRepository;
 import za.ac.cput.elective.repository.impl.ElectiveRepositoryImpl;
@@ -11,7 +12,7 @@ import java.util.*;
  * Desc: Created ElectiveServiceImpl which extends ElectiveService
  * Date: 06/09/2020
  **/
-
+    @Service
 public class ElectiveServiceImpl implements ElectiveService {
 
     private static ElectiveService eService = null;
