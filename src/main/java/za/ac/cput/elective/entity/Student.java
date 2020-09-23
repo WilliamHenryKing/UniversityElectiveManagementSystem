@@ -10,7 +10,9 @@ public class Student {
     private String studentID;
 
 
-    private Student(Builder b) {
+    private Student(){}
+
+    public Student(Builder b) {
         this.studentID = b.studentID;
         this.stream = b.stream;
         this.year = b.year;
