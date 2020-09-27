@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Room;
 import za.ac.cput.elective.repository.RoomRepository;
 import za.ac.cput.elective.repository.impl.RoomRepositoryImpl;
@@ -12,7 +13,7 @@ import java.util.Set;
  * Desc         : The implementation of the RoomService.
  * Date         : 06/09/2020
  **/
-
+@Service
 public class RoomServiceImpl implements RoomService {
 
     public static RoomService roomService = null;

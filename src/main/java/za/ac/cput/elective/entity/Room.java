@@ -8,6 +8,8 @@ public class Room {
     private String roomNum;
     private int roomNumSeats;
 
+    private Room (){}
+
     private Room(Builder builder) {
         this.roomNum = builder.roomNum;
         this.roomNumSeats = builder.roomNumSeats;
