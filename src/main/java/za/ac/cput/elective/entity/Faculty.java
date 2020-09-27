@@ -1,5 +1,7 @@
 package za.ac.cput.elective.entity;
 
+import org.springframework.stereotype.Service;
+
 import java.io.Serializable;
 import java.util.*;
 
