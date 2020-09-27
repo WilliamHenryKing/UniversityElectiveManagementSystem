@@ -5,7 +5,7 @@ package za.ac.cput.elective.entity;
  * Date: 4rd July 2020
  */
 
-public class Elective {
+public class Elective  {
 
     /* Encapsulation */
     private String electName;
