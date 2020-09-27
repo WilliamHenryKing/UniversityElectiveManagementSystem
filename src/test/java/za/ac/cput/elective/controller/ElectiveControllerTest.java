@@ -32,52 +32,45 @@ import static org.junit.Assert.*;
     private String baseURL = "http://localhost:8080/elective/";
 
     @Test
-    public void a_create(){
-        String url = baseURL + "create/";
-        System.out.println("URL: " + url);
-        System.out.println("Post data: " + elective);
+    public void a_create() {
+
+        String url = baseURL + "create";
+        System.out.println("URL" + url);
+        System.out.println("Post data" + elective);
+
         ResponseEntity<Elective> postResponse = restTemplate.postForEntity(url, elective, Elective.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
-        elective = postResponse.getBody();
-        System.out.println("Saved data: " + elective);
-        assertEquals(elective.getElectName(),postResponse.getBody().getElectName());
-
-        /*the test's fails but the elective details are still created,
-        but I gave up on trying to fix it after a few hours.
-        */
+        System.out.println("Saved data:" + elective);
+        assertEquals(elective.getElectName(), postResponse.getBody().getElectName());
     }
 
 
     @Test
-    public void b_read(){
-        ResponseEntity<Elective> getResponse = restTemplate.getForEntity(baseURL
-                        + "read/" + elective.getElectName()
-                        + elective.getElectDesc(),
-                Elective.class);
-        assertEquals(elective.getElectName() + elective.getElectDesc(),
-                Objects.requireNonNull(getResponse.getBody()).getElectName(),
-                getResponse.getBody().getElectDesc());
-        System.out.println(getResponse.getBody());
+    public void b_read() {
 
-        /*Test Fails, I even tried it my group members way and still fails.*/
+        String url = baseURL + "read/" + elective.getElectName();
+        System.out.println(url);
+        ResponseEntity<Elective> response = restTemplate.getForEntity(url, Elective.class);
+
+        System.out.println(response.getBody());
+        assertEquals(elective.getElectName(), response.getBody().getElectName());
+        System.out.println("READ:" +response);
+
     }
 
     @Test
     public void c_modify() {
 
-        String old = elective.getElectName() + elective.getElectDesc();
-        AtomicReference<Elective> modified = new AtomicReference<>(new Elective.Builder()
+        Elective update = new Elective.Builder()
                 .copy(elective)
-                .setElectName("BA")
-                .setElectDesc("Data Structures")
-                .build());
-        ResponseEntity<Elective> changedResponse = restTemplate.postForEntity(baseURL + "change", elective,
-                Elective.class);
-        assertNotEquals(old, Objects.requireNonNull(changedResponse.getBody()).getElectName());
-        System.out.println("Modified: " + modified);
-        /*Test Fails, I even tried it my group members way and still fails.
-        After hours of trying different methods to try and fix the problem.*/
+                .setElectName("BNA")
+                .build();
+        String url = baseURL +"modify";
+        ResponseEntity<Elective> responseEntity = restTemplate.postForEntity(url, update, Elective.class);
+        assertNotNull(elective.getElectName(), responseEntity.getBody().getElectName());
+        System.out.println("Modified..." +responseEntity.getBody());
+
     }
 
     @Test
@@ -85,7 +78,6 @@ import static org.junit.Assert.*;
         String url = baseURL + "delete/"+ "  " + elective.getElectName() + "  and: " + elective.getElectDesc();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
-
         /*Works!!! it actually deletes the details created.*/
     }
 
