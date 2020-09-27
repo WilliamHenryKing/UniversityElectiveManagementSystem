@@ -1,5 +1,8 @@
 package za.ac.cput.elective.entity;
 
+import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -8,10 +11,13 @@ import java.util.*;
  * Date: 3rd July 2020
 */
 
-public class Faculty {
+public class Faculty implements Serializable {
 
     private String facultyID;
     private String facultyName;
+
+    private Faculty() {
+    }
 
     private Faculty(Builder builder) {
         this.facultyID = builder.facultyID;
