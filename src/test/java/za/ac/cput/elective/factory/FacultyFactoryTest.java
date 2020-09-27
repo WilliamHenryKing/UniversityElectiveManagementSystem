@@ -21,6 +21,7 @@ public class FacultyFactoryTest {
 
         int num = Integer.parseInt(facu.getFacultyID());
 
+        System.out.println(facu);
         Assert.assertTrue(num <= 9999);
         Assert.assertNotNull("Faculty cannot be Empty", facu.getFacultyName());
     }

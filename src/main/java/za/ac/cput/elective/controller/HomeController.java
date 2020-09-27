@@ -8,7 +8,6 @@ public class HomeController {
 
     @RequestMapping({"/", "/index.xys"})
     String home() {
-        return "Hello World!";
+        return "This is the Home Page";
     }
-
 }

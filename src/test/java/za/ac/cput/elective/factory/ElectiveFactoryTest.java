@@ -15,7 +15,7 @@ public class ElectiveFactoryTest {
 
         Elective elec = ef.createElective("PHP", "Similar to Java, Just done in a HTML environment");
         Assert.assertEquals("PHP", elec.getElectName());
-       Assert.assertEquals("Similar to Java, Just done in a HTML environment", elec.getElectDesc());
+        Assert.assertEquals("Similar to Java, Just done in a HTML environment", elec.getElectDesc());
     }
 
 }
