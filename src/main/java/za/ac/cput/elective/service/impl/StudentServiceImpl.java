@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Student;
 import za.ac.cput.elective.repository.StudentRepository;
 import za.ac.cput.elective.repository.impl.StudentRepositoryImpl;
@@ -11,6 +12,8 @@ import java.util.Set;
  * Desc: Interface for StudentService
  * Date: 5 September 2020
  **/
+
+@Service
 public class StudentServiceImpl implements StudentService {
     
     private static StudentService s = null;
