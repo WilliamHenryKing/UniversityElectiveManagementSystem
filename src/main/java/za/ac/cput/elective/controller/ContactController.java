@@ -34,7 +34,7 @@ public class ContactController {
 
     @GetMapping("/update")
     public Contact update(@RequestBody Contact contact) {
-        return contactService.update(contact)
+        return contactService.update(contact);
     }
 
     @GetMapping("/all")
