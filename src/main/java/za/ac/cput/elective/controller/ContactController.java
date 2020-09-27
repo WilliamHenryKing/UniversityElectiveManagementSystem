@@ -8,11 +8,11 @@ import za.ac.cput.elective.service.impl.ContactServiceImpl;
 
 import java.util.Set;
 
-//@RestController
-//@RequestMapping("/contact")
+@RestController
+@RequestMapping("/contact")
 public class ContactController {
 
-//    @Autowired
+    @Autowired
     private ContactServiceImpl contactService;
 
     @PostMapping("/create")

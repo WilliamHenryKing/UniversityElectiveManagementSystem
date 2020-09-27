@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.boot.jdbc.DatabaseDriver;
+import za.ac.cput.elective.MainApplication;
 import za.ac.cput.elective.entity.Contact;
+import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ContactFactory;
 import za.ac.cput.elective.repository.ContactRepository;
 

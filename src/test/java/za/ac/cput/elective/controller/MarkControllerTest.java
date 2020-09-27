@@ -13,9 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Mark;
 import za.ac.cput.elective.factory.MarkFactory;
 
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 
