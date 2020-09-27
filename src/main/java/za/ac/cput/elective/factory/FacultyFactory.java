@@ -1,5 +1,6 @@
 package za.ac.cput.elective.factory;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Faculty;
 
 /**

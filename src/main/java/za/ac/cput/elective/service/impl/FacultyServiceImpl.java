@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Faculty;
 import za.ac.cput.elective.repository.FacultyRepository;
 import za.ac.cput.elective.repository.impl.FacultyRepositoryImpl;
@@ -13,6 +14,7 @@ import java.util.Set;
  * Date: 6th September 2020
  **/
 
+@Service
 public class FacultyServiceImpl implements FacultyService {
 
     private static FacultyService facuServ = null;
