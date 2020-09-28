@@ -11,64 +11,68 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Contact;
+import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.factory.ContactFactory;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import za.ac.cput.elective.factory.GenderFactory;
+import za.ac.cput.elective.service.GenderService;
+import za.ac.cput.elective.service.impl.GenderServiceImpl;
+
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
-public class ContactControllerTest {
+public class GenderControllerTest {
 
-    private static Contact contact = ContactFactory.createContact("215028545@mycput.ac.za",
-            "0123456789", "0987654321");
+    private static Gender.genderIs femaleGender = Gender.genderIs.FEMALE;
+    private static Gender gender = new GenderFactory().createGender(femaleGender);
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-    private String baseURL = "http://localhost:8080/contact/";
+    private String baseURL = "http://localhost:8080/gender/";
 
     @Test
     public void a_create() {
 
-        ResponseEntity<Contact> postResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Gender> postResponse = testRestTemplate.postForEntity(
                 baseURL + " create",
-                contact,
-                Contact.class);
+                gender,
+                Gender.class);
 
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
 
-        System.out.println("Data:\n\n" + contact);
+        System.out.println("Data:\n\n" + gender);
 
     }
 
     @Test
     public void b_read() {
 
-        ResponseEntity<Contact> showResponse = testRestTemplate.getForEntity(baseURL +
-                " read/" +
-                contact.getEmailAdd(),
-                Contact.class);
+        ResponseEntity<Gender> showResponse = testRestTemplate.getForEntity(baseURL +
+                        " read/" +
+                        gender.getGenderID(),
+                Gender.class);
 
-        assertEquals(contact.getEmailAdd(), showResponse.getBody().getEmailAdd());
+        assertEquals(gender.getGenderID(), showResponse.getBody().getGenderID());
 
     }
 
     @Test
     public void c_update() {
 
-        Contact contactUpdated = new Contact
+        Gender genderUpdated = new Gender
                 .Builder()
-                .copy(contact)
-                .setEmailAdd("215028546@mycput.ac.za")
+                .copy(gender)
+                .setGenderID(Gender.genderIs.UNDEFINED)
                 .build();
 
-        ResponseEntity<Contact> updatedResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Gender> updatedResponse = testRestTemplate.postForEntity(
                 baseURL + " update",
-                contactUpdated,
-                Contact.class);
+                genderUpdated,
+                Gender.class);
 
-        assertEquals(contact.getEmailAdd(),
-                updatedResponse.getBody().getEmailAdd());
+        assertEquals(gender.getGenderID(),
+                updatedResponse.getBody().getGenderID());
 
     }
 
@@ -91,6 +95,6 @@ public class ContactControllerTest {
 
     @Test
     public void e_delete() {
-        testRestTemplate.delete(baseURL + "delete/" + contact.getEmailAdd());
+        testRestTemplate.delete(baseURL + "delete/" + gender.getGenderID());
     }
 }

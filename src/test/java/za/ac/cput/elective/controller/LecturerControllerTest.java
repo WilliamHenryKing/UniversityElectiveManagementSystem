@@ -10,65 +10,70 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import za.ac.cput.elective.entity.Contact;
-import za.ac.cput.elective.factory.ContactFactory;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import za.ac.cput.elective.entity.Gender;
+import za.ac.cput.elective.entity.Lecturer;
+import za.ac.cput.elective.factory.GenderFactory;
+import za.ac.cput.elective.factory.LecturerFactory;
+
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
-public class ContactControllerTest {
+public class LecturerControllerTest {
 
-    private static Contact contact = ContactFactory.createContact("215028545@mycput.ac.za",
-            "0123456789", "0987654321");
+    private static Gender maleGender = GenderFactory.createGender(Gender.genderIs.MALE);
+    private static Lecturer lecturer = LecturerFactory.createLecturer(621548793
+            , "Anikwue"
+            , "Arinze"
+            , maleGender);
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-    private String baseURL = "http://localhost:8080/contact/";
+    private String baseURL = "http://localhost:8080/lecturer/";
 
     @Test
     public void a_create() {
 
-        ResponseEntity<Contact> postResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Lecturer> postResponse = testRestTemplate.postForEntity(
                 baseURL + " create",
-                contact,
-                Contact.class);
+                lecturer,
+                Lecturer.class);
 
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
 
-        System.out.println("Data:\n\n" + contact);
+        System.out.println("Data:\n\n" + lecturer);
 
     }
 
     @Test
     public void b_read() {
 
-        ResponseEntity<Contact> showResponse = testRestTemplate.getForEntity(baseURL +
-                " read/" +
-                contact.getEmailAdd(),
-                Contact.class);
+        ResponseEntity<Lecturer> showResponse = testRestTemplate.getForEntity(baseURL +
+                        " read/" +
+                        lecturer.getLecturerID(),
+                Lecturer.class);
 
-        assertEquals(contact.getEmailAdd(), showResponse.getBody().getEmailAdd());
+        assertEquals(lecturer.getLecturerID(), showResponse.getBody().getLecturerID());
 
     }
 
     @Test
     public void c_update() {
 
-        Contact contactUpdated = new Contact
+        Lecturer lecturerUpdated = new Lecturer
                 .Builder()
-                .copy(contact)
-                .setEmailAdd("215028546@mycput.ac.za")
+                .copy(lecturer)
+                .setLecturerID(62228514)
                 .build();
 
-        ResponseEntity<Contact> updatedResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Lecturer> updatedResponse = testRestTemplate.postForEntity(
                 baseURL + " update",
-                contactUpdated,
-                Contact.class);
+                lecturerUpdated,
+                Lecturer.class);
 
-        assertEquals(contact.getEmailAdd(),
-                updatedResponse.getBody().getEmailAdd());
+        assertEquals(lecturer.getLecturerID(),
+                updatedResponse.getBody().getLecturerID());
 
     }
 
@@ -91,6 +96,6 @@ public class ContactControllerTest {
 
     @Test
     public void e_delete() {
-        testRestTemplate.delete(baseURL + "delete/" + contact.getEmailAdd());
+        testRestTemplate.delete(baseURL + "delete/" + lecturer.getLecturerID());
     }
 }

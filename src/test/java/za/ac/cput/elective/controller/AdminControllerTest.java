@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Admin;
 import za.ac.cput.elective.factory.AdminFactory;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
