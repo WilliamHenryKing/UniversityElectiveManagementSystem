@@ -1,5 +1,6 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.repository.GenderRepository;
 import za.ac.cput.elective.repository.impl.GenderRepositoryImpl;
@@ -12,7 +13,7 @@ import java.util.Set;
  * Desc: Implementation for GenderService
  * Date: 2020/09/06
  **/
-
+@Service
 public class GenderServiceImpl implements GenderService {
 
     private static GenderService genderService = null;
