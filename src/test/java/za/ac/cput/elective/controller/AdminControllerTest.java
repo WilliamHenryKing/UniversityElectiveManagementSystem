@@ -10,50 +10,49 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import za.ac.cput.elective.entity.Student;
-import za.ac.cput.elective.factory.StudentFactory;
+import za.ac.cput.elective.entity.Admin;
+import za.ac.cput.elective.factory.AdminFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
-public class StudentControllerTest {
+public class AdminControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    private static final String baseURL = "http://localhost:8080/student/";
-    private static Student s = StudentFactory.createStudent(2, "AppDev");
+    private static final String baseURL = "http://localhost:8080/admin/";
+    private static Admin ad = AdminFactory.buildAdmin("2", "Simba");
+
     @Test
     public void create() {
-
         String url = baseURL + "create";
-        ResponseEntity<Student> r = restTemplate.postForEntity(url, s, Student.class);
-        assertNotNull(r);
-        assertNotNull(r.getBody());
+        ResponseEntity<Admin> a = restTemplate.postForEntity(url, ad, Admin.class);
 
-        System.out.println(r.getBody());
-
+        assertNotNull(ad);
+        assertNotNull(a.getBody());
+        System.out.println(a.getBody());
     }
 
     @Test
     public void read() {
-        String url = baseURL + "read/" + s.getStudentID();
-        ResponseEntity<Student> r = restTemplate.getForEntity(url, Student.class);
-        assertEquals(s.getStudentID(), r.getBody().getStudentID());
+        String url = baseURL + "read/" + ad.getAdminID();
+        ResponseEntity<Admin> re = restTemplate.getForEntity(url, Admin.class);
+        assertEquals(ad.getAdminID(), re.getBody().getAdminID());
     }
 
     @Test
     public void update() {
-        Student u = new Student.Builder().copy(s).setStudentID("230").build();
+        Admin up = new Admin.AdminBuilder().copy(ad).setAdminID("5").build();
         String url = baseURL + "update";
-        ResponseEntity<Student> r = restTemplate.postForEntity(url, u, Student.class);
-        assertEquals(s.getStudentID(), r.getBody().getStudentID());
+        ResponseEntity<Admin> ren = restTemplate.postForEntity(url, up, Admin.class);
+        assertEquals(ad.getAdminID(), ren.getBody().getAdminID());
     }
 
     @Test
     public void delete() {
-        String url = baseURL + "delete/" + s.getStudentID();
+        String url = baseURL + "delete/" + ad.getAdminID();
         restTemplate.delete(url);
     }
 
@@ -62,9 +61,9 @@ public class StudentControllerTest {
         String url = baseURL + "all";
         HttpHeaders h = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, h);
-        ResponseEntity<String> r = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> ren = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
-        System.out.println(r);
-        System.out.println(r.getBody());
+        System.out.println(ren);
+        System.out.println(ren.getBody());
     }
 }

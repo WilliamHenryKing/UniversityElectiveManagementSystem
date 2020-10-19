@@ -9,6 +9,8 @@ public class Admin {
     private String adminID;
     private String adminName;
 
+    private Admin(){}
+
     public Admin(AdminBuilder builder) {
         this.adminID = builder.adminID;
         this.adminName = builder.adminName;

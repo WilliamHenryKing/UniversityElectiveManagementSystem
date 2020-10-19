@@ -7,68 +7,89 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpClientErrorException;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
+
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ElectiveControllerTest {
+@RunWith(SpringRunner.class)
 
+ public class ElectiveControllerTest {
+
+    private Elective elective = ElectiveFactory.createElective("BA","Data Structures");
     @Autowired
     private TestRestTemplate restTemplate;
-    private static final String baseURL = "http://localhost:8080/elective/";
-
+    private String baseURL = "http://localhost:8080/elective/";
 
     @Test
-    public void create() {
-        Elective elect  = ElectiveFactory.createElective("Scala", "Mathematical Coding");
-        ResponseEntity<Elective> postResponse = restTemplate.postForEntity
-                      (baseURL + "/create", elect, Elective.class);
+    public void a_create() {
+
+        String url = baseURL + "create";
+        System.out.println("URL" + url);
+        System.out.println("Post data" + elective);
+
+        ResponseEntity<Elective> postResponse = restTemplate.postForEntity(url, elective, Elective.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
+        System.out.println("Saved data:" + elective);
+        assertEquals(elective.getElectName(), postResponse.getBody().getElectName());
     }
 
-    //READ METHOD
 
     @Test
-    public void update(){
-        String electName = "Data Structures";
-        String electDesc = "I have no clue what it is about!!!";
-        Elective elect = restTemplate.getForObject( baseURL + "/elect/"
-                + electName + electDesc, Elective.class );
-        Elective updatedElective = restTemplate.getForObject( baseURL + "/elect/"
-                + electName + electDesc, Elective.class );
-        assertNotNull( updatedElective );
-    }
+    public void b_read() {
 
-    public void delete() {
-        String electName = "Data Structures";
-        String electDesc = "I have no clue what it is about!!!";
-        Elective elect = restTemplate.getForObject(baseURL + "/elective/" + electName + electDesc, Elective.class);
-        assertNotNull(elect);
-        restTemplate.delete(baseURL + "/elective/" + electName + electDesc);
-        try {
-            elect = restTemplate.getForObject(baseURL + "/elective/" + electName + electDesc, Elective.class);
-        } catch (final HttpClientErrorException e) {
-            assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
-        }
+        String url = baseURL + "read/" + elective.getElectName();
+        System.out.println(url);
+        ResponseEntity<Elective> response = restTemplate.getForEntity(url, Elective.class);
+
+        System.out.println(response.getBody());
+        assertEquals(elective.getElectName(), response.getBody().getElectName());
+        System.out.println("READ:" +response);
+
     }
 
     @Test
-    public void getAll() {
-        HttpHeaders headers = new HttpHeaders();
+    public void c_modify() {
 
-        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-        ResponseEntity<String> response = restTemplate.exchange
-                (baseURL + "/read/all", HttpMethod.GET, entity, String.class);
-        assertNotNull(response.getBody());
+        Elective update = new Elective.Builder()
+                .copy(elective)
+                .setElectName("BNA")
+                .build();
+        String url = baseURL +"modify";
+        ResponseEntity<Elective> responseEntity = restTemplate.postForEntity(url, update, Elective.class);
+        assertNotNull(elective.getElectName(), responseEntity.getBody().getElectName());
+        System.out.println("Modified..." +responseEntity.getBody());
 
- }
+    }
 
-}//END OF CONTROLLER TEST CLASS!!!
+    @Test
+    public void d_delete(){
+        String url = baseURL + "delete/"+ "  " + elective.getElectName() + "  and: " + elective.getElectDesc();
+        System.out.println("URL: " + url);
+        restTemplate.delete(url);
+        /*Works!!! it actually deletes the details created.*/
+    }
+
+    @Test
+    public void getAll(){
+        String url = baseURL + "all/";
+        HttpHeaders headers= new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null,headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
+        System.out.println(response);
+        System.out.println(response.getBody());
+        /*Works!!!*/
+    }
+
+}

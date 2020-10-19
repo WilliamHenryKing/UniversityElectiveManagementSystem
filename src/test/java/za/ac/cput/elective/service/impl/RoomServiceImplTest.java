@@ -58,7 +58,6 @@ public class RoomServiceImplTest {
     @Test
     public void f_delete() {
         boolean deleted = roomService.delete(room.getRoomNum());
-        Assert.assertTrue(deleted);
-        System.out.println("Deleted..." +deleted);
+        Assert.assertTrue(deleted);System.out.println("Deleted..." +deleted);
     }
 }
