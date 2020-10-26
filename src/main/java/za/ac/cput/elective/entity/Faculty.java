@@ -2,6 +2,8 @@ package za.ac.cput.elective.entity;
 
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.*;
 
@@ -11,12 +13,14 @@ import java.util.*;
  * Date: 3rd July 2020
 */
 
+@Entity
 public class Faculty implements Serializable {
 
+    @Id
     private String facultyID;
     private String facultyName;
 
-    private Faculty() {
+    protected Faculty() {
     }
 
     private Faculty(Builder builder) {
@@ -69,5 +73,18 @@ public class Faculty implements Serializable {
                 "Faculty ID = " + facultyID +
                 ", Faculty Name = '" + facultyName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Faculty faculty = (Faculty) o;
+        return facultyID.equals(faculty.facultyID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(facultyID);
     }
 }
