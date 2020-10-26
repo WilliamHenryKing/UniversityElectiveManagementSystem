@@ -1,7 +1,9 @@
 package za.ac.cput.elective.controller;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -19,6 +21,7 @@ import za.ac.cput.elective.service.impl.GenderServiceImpl;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class GenderControllerTest {
@@ -34,7 +37,7 @@ public class GenderControllerTest {
     public void a_create() {
 
         ResponseEntity<Gender> postResponse = testRestTemplate.postForEntity(
-                baseURL + " create",
+                baseURL + "create",
                 gender,
                 Gender.class);
 
@@ -49,7 +52,7 @@ public class GenderControllerTest {
     public void b_read() {
 
         ResponseEntity<Gender> showResponse = testRestTemplate.getForEntity(baseURL +
-                        " read/" +
+                        "read/" +
                         gender.getGenderID(),
                 Gender.class);
 
@@ -67,7 +70,7 @@ public class GenderControllerTest {
                 .build();
 
         ResponseEntity<Gender> updatedResponse = testRestTemplate.postForEntity(
-                baseURL + " update",
+                baseURL + "update",
                 genderUpdated,
                 Gender.class);
 
@@ -83,7 +86,7 @@ public class GenderControllerTest {
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
         ResponseEntity<String> theResponse = testRestTemplate.exchange(
-                baseURL + " all",
+                baseURL + "all",
                 HttpMethod.GET,
                 stringHttpEntity,
                 String.class);

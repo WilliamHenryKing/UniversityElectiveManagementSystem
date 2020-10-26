@@ -1,6 +1,8 @@
 package za.ac.cput.elective.repository;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.elective.entity.Gender;
 import java.util.Set;
 
@@ -9,7 +11,7 @@ import java.util.Set;
  * Desc: Interface for GenderRepository
  * Date: 2020/08/30
  **/
+@Repository
+public interface GenderRepository extends JpaRepository<Gender, Character> {
 
-public interface GenderRepository extends IRepository<Gender, Character> {
-    Set<Gender> getAll();
 }
