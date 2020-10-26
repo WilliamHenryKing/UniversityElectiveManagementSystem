@@ -1,16 +1,25 @@
 package za.ac.cput.elective.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+
 /**
  * @author @WilliamHenryKing
  * Desc: Entity for Contact
  * Date: 2020/07/05
  **/
 
+@Entity
 public class Contact {
 
+    @Id
     private String emailAdd;
+
     private String cellNo;
     private String telNo;
+
+    protected Contact(){}
 
     private Contact(Builder builder) {
         this.emailAdd = builder.emailAdd;
@@ -58,6 +67,19 @@ public class Contact {
         public Contact build() {
             return new Contact(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return emailAdd.equals(contact.emailAdd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(emailAdd);
     }
 
     @Override

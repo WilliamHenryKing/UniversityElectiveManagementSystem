@@ -1,18 +1,25 @@
 package za.ac.cput.elective.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * @author @WilliamHenryKing
  * Desc: Entity for Gender
  * Date: 2020/07/05
  **/
 
+@Entity
 public class Gender {
 
     public enum genderIs {
         MALE, FEMALE, UNDEFINED
     }
 
+    @Id
     private genderIs genderID;
+
+    protected Gender() {}
 
     private Gender(Builder builder) {
         this.genderID = builder.genderID;

@@ -6,6 +6,7 @@ package za.ac.cput.elective.repository;
  * Date: 2020/08/26
  **/
 
+@Deprecated
 public interface IRepository<T, ID> {
 
     T create(T t);

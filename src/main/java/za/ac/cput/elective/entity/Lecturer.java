@@ -1,23 +1,31 @@
 package za.ac.cput.elective.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * @author @WilliamHenryKing
  * Desc: Entity for Lecturer
  * Date: 2020/07/05
  **/
 
+@Entity
 public class Lecturer {
 
+    @Id
     private long lecturerID;
+
     private String lecturerLName;
     private String lecturerFName;
-    private Gender gender;
+    //private Gender gender;
+
+    protected Lecturer() {}
 
     private Lecturer(Builder builder) {
         this.lecturerID = builder.lecturerID;
         this.lecturerLName = builder.lecturerLName;
         this.lecturerFName = builder.lecturerFName;
-        this.gender = builder.gender;
+        //this.gender = builder.gender;
     }
 
     public long getLecturerID() {
@@ -32,9 +40,9 @@ public class Lecturer {
         return lecturerFName;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
+    //public Gender getGender() {
+       // return gender;
+   // }
 
 
     public static class Builder {
@@ -67,7 +75,7 @@ public class Lecturer {
             this.lecturerID = lecturer.lecturerID;
             this.lecturerLName = lecturer.lecturerLName;
             this.lecturerFName = lecturer.lecturerFName;
-            this.gender = lecturer.gender;
+            //this.gender = lecturer.gender;
             return this;
         }
 
@@ -81,7 +89,7 @@ public class Lecturer {
         return "Lecturer" +
                 "\nLecturerID: " + lecturerID +
                 "\nLecturerLName: " + lecturerLName +
-                "\nLecturerFName: " + lecturerFName +
-                "\nGender: " + gender;
+                "\nLecturerFName: " + lecturerFName;
+                //+ "\nGender: " + gender;
     }
 }
