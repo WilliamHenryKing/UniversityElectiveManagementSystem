@@ -12,12 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.entity.Gender;
-import za.ac.cput.elective.factory.ContactFactory;
 import za.ac.cput.elective.factory.GenderFactory;
-import za.ac.cput.elective.service.GenderService;
-import za.ac.cput.elective.service.impl.GenderServiceImpl;
 
 import static org.junit.Assert.*;
 

@@ -2,6 +2,7 @@ package za.ac.cput.elective.controller;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -59,7 +60,6 @@ public class FacultyControllerTest {
                 Faculty.class);
         assertNotEquals(old, changedResponse.getBody().getFacultyID());
         System.out.println("Changed: " + changed);
-
     }
 
     @Test
