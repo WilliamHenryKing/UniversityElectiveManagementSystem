@@ -1,5 +1,7 @@
 package za.ac.cput.elective.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.elective.entity.Contact;
 
 import java.util.Set;
@@ -9,7 +11,7 @@ import java.util.Set;
  * Desc: Interface for ContactRepository
  * Date: 2020/08/26
  **/
+@Repository
+public interface ContactRepository extends JpaRepository<Contact, String> {
 
-public interface ContactRepository extends IRepository<Contact, String> {
-    Set<Contact> getAll();
 }
