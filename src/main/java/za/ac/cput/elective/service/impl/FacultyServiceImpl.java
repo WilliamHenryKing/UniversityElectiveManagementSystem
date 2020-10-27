@@ -1,12 +1,13 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Faculty;
 import za.ac.cput.elective.repository.FacultyRepository;
-import za.ac.cput.elective.repository.impl.FacultyRepositoryImpl;
 import za.ac.cput.elective.service.FacultyService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author: Ridhaa Hendricks 218120966, GitHub: ridhaahendricks
@@ -17,44 +18,37 @@ import java.util.Set;
 @Service
 public class FacultyServiceImpl implements FacultyService {
 
-    private static FacultyService facuServ = null;
+    @Autowired
     private FacultyRepository facuRep;
-
-    private FacultyServiceImpl(){
-        this.facuRep = FacultyRepositoryImpl.getRepository();
-    }
-
-    public static FacultyService getService(){
-        if (facuServ == null){
-            facuServ = new FacultyServiceImpl();
-        }
-
-        return facuServ;
-    }
 
     @Override
     public Faculty create(Faculty faculty) {
-        return this.facuRep.create(faculty);
+        return this.facuRep.save(faculty);
     }
 
     @Override
-    public Faculty read(String s) {
-        return this.facuRep.read(s);
-    }
+    public Faculty read(String s) {return this.facuRep.findById(s).orElseGet(null); }
 
     @Override
     public Faculty update(Faculty faculty) {
-        return this.facuRep.update(faculty);
+        if(this.facuRep.existsById(faculty.getFacultyID())) {
+            return this.facuRep.save(faculty);
+        }
+        return null;
     }
 
     @Override
     public boolean delete(String s) {
-        return this.facuRep.delete(s);
+         this.facuRep.deleteById(s);
+         if (this.facuRep.existsById(s)){
+             return false;
+         } else {
+             return true;
+         }
     }
 
     @Override
     public Set<Faculty> getAll() {
-        return this.facuRep.getAll();
+        return this.facuRep.findAll().stream().collect(Collectors.toSet());
     }
-
 }
