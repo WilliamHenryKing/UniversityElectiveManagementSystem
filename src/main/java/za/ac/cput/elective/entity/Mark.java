@@ -8,9 +8,21 @@ package za.ac.cput.elective.entity;
 
 //Mark.java 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
 public class Mark
 {
+    @Id
     private String marksID;
+
+    protected Mark()
+    {
+
+    }
 
     private Mark(Builder builder)
     {
@@ -71,6 +83,21 @@ public class Mark
     public String toString()
     {
         return "Mark ID: " + marksID;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mark mark = (Mark) o;
+        return marksID.equals(mark.marksID);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(marksID);
     }
 }
 
