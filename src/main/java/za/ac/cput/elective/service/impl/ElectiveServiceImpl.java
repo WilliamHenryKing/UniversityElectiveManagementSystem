@@ -1,11 +1,12 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.repository.ElectiveRepository;
-import za.ac.cput.elective.repository.impl.ElectiveRepositoryImpl;
 import za.ac.cput.elective.service.ElectiveService;
-import java.util.*;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author @ShanePhumlaniMapasie
@@ -16,8 +17,9 @@ import java.util.*;
 public class ElectiveServiceImpl implements ElectiveService {
 
     private static ElectiveService eService = null;
+    @Autowired
     private ElectiveRepository eRepo;
-
+   /*
     private ElectiveServiceImpl(){
         this.eRepo = ElectiveRepositoryImpl.getRepository();
     }
@@ -29,29 +31,38 @@ public class ElectiveServiceImpl implements ElectiveService {
 
         return eService;
     }
+  */
+   @Override
+   public Elective create(Elective elective) {
 
-    @Override
-    public Elective create(Elective elect) {
-        return this.eRepo.create(elect);
-    }
+       return this.eRepo.save(elective);
+
+   }
 
     @Override
     public Elective read(String s) {
-        return this.eRepo.read(s);
+        return this.eRepo.findById(s).orElseGet(null);
     }
 
     @Override
-    public Elective update(Elective elect) {
-        return this.eRepo.update(elect);
+    public Elective update(Elective elective) {
+        if(this.eRepo.existsById(elective.getElectName())) {
+            return this.eRepo.save(elective);
+        }
+        return null;
     }
 
     @Override
     public boolean delete(String s) {
-        return this.eRepo.delete(s);
+        this.eRepo.deleteById(s);
+        return !this.eRepo.existsById(s);
     }
 
     @Override
     public Set<Elective> getAll() {
-        return this.eRepo.getAll();
+        Set<Elective> collect = this.eRepo.findAll()
+                .stream()
+                .collect(Collectors.toSet());
+        return collect;
     }
 }

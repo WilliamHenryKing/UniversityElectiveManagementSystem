@@ -1,53 +1,55 @@
 package za.ac.cput.elective.service.impl;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import za.ac.cput.elective.entity.Contact;
+import org.junit.jupiter.api.Assertions;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Elective;
-import za.ac.cput.elective.entity.Faculty;
-import za.ac.cput.elective.factory.ContactFactory;
 import za.ac.cput.elective.factory.ElectiveFactory;
-import za.ac.cput.elective.factory.FacultyFactory;
-import za.ac.cput.elective.service.ContactService;
 import za.ac.cput.elective.service.ElectiveService;
-import za.ac.cput.elective.service.FacultyService;
-
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @author @ShanePhumlaniMapasie
  * Desc: Test for ElectiveServiceImpl
  * Date: 06/09/2020
  **/
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ElectiveServiceImplTest {
 
-    private static ElectiveService eService = ElectiveServiceImpl.getElectiveService();
-    private static Elective elect = ElectiveFactory.createElective("Data Structures",
-            "It involves Binary Trees, with Java integrated code");
+    @Autowired
+    private static ElectiveService eService;
+    private static Elective elect = ElectiveFactory.createElective("Javascript", "Is a text-based programming Lang..,");
 
     @Test
     public void a_create() {
-        Elective created = eService.create(elect);
-        Assert.assertEquals(elect.getElectName(), created.getElectName());
-        System.out.println("CREATED: " + created);
+        Elective e = eService.create(elect);
+        Assert.assertEquals(e.getElectCode(), elect.getElectCode());
+        System.out.println(e);
     }
+
 
     @Test
     public void b_read() {
-        Elective alert = eService.read(elect.getElectName());
-        System.out.println("Elective Name: " + alert.getElectName() +
-                ", Elective Desc: " + alert.getElectDesc());
+
+        Elective elec = eService.create(elect);
+        eService.read(elec.getElectName());
+        System.out.println(elec);
     }
 
     @Test
     public void c_update() {
-        Elective amend = new Elective.Builder()
+        Elective e = new Elective.Builder()
                 .copy(elect)
-                .setElectName("Data Structures")
+                .setElectName("Android")
                 .build();
-        amend = eService.update(amend);
-        System.out.println("\nAmended: " + amend);
+        e = eService.update(e);
+        System.out.println(e);
     }
 
     @Test
@@ -61,10 +63,4 @@ public class ElectiveServiceImplTest {
         }
     }
 
-    @Test
-    public void d_getAll() {
-        Set<Elective> electives = eService.getAll();
-        Assert.assertEquals(1, electives.size());
-        System.out.println("\nDisplay All:\n" + electives);
-    }
 }
