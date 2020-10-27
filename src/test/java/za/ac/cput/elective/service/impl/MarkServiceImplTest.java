@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Mark;
 import za.ac.cput.elective.factory.MarkFactory;
 import za.ac.cput.elective.service.MarkService;
@@ -21,7 +22,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MarkServiceImplTest
 {
-    private static MarkService service = MarkServiceImpl.getService();
+    @Autowired
+    private static MarkService service;
     private static Mark mark = MarkFactory.createMark("aaa");
 
     @Test
