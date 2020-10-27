@@ -1,16 +1,25 @@
 package za.ac.cput.elective.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /*
  * @author: Shane  Mapasie, GitHub: SPMapasie216182425
  * Desc: Create Elective.java class with attributes using the Builder pattern
  * Date: 4rd July 2020
  */
 
+
+ @Entity
 public class Elective  {
 
     /* Encapsulation */
-    private String electName;
+    @Id
     private long electCode;
+    private String electName;
     private String electDesc;
+
+    protected Elective(){};
 
     /* constructor */
     private Elective(Builder b) {

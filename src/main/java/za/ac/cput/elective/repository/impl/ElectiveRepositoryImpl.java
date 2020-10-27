@@ -1,4 +1,4 @@
-package za.ac.cput.elective.repository.impl;
+//package za.ac.cput.elective.repository.impl;
 
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.repository.ElectiveRepository;
@@ -7,12 +7,12 @@ import java.util.*;
 
 
 
-public class  ElectiveRepositoryImpl implements ElectiveRepository{
+/*public class  ElectiveRepositoryImpl implements ElectiveRepository{
 
     private static ElectiveRepository eRepo = null;
     private Set<Elective> electiveDB;
 
-    /*CONSTRUCTOR*/
+    //CONSTRUCTOR
     public ElectiveRepositoryImpl() {
         this.electiveDB = new HashSet<>();
     }
@@ -26,12 +26,12 @@ public class  ElectiveRepositoryImpl implements ElectiveRepository{
 
     /*create, read, update, and delete methods*/
 
-    /*CREATE METHOD*/
+    /*CREATE METHOD
     public Elective create(Elective elective){
         this.electiveDB.add(elective);
         return elective;
     }
-    /*READ METHOD*/
+    //READ METHOD
     public Elective read(String electName){
         Elective elective = null;
         for(Elective elec: this.electiveDB) {
@@ -43,8 +43,8 @@ public class  ElectiveRepositoryImpl implements ElectiveRepository{
         }//end of the for loop
         return elective;
     }
-    /*UPDATE METHOD*/
-    public Elective update(Elective elective){
+    //UPDATE METHOD*/
+   /* public Elective update(Elective elective){
         Elective oldElective = read(elective.getElectCode()+elective.getElectName());
         if(oldElective != null){
             this.electiveDB.remove(oldElective);
@@ -53,7 +53,7 @@ public class  ElectiveRepositoryImpl implements ElectiveRepository{
         return elective;
     }//end of the UPDATE method
 
-    /*DELETE METHOD*/
+    //DELETE METHOD/
     public boolean delete(String electName){
         Elective elective = read(electName);
         if(elective != null) this.electiveDB.remove(elective);{
@@ -65,4 +65,4 @@ public class  ElectiveRepositoryImpl implements ElectiveRepository{
     public Set<Elective> getAll() {
         return electiveDB;
     }
-}
+}*/
