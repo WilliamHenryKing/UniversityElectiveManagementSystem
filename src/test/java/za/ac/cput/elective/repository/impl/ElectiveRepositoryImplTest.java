@@ -1,9 +1,9 @@
-package za.ac.cput.elective.repository.impl;
-/*
- * @author: Shane  Mapasie, GitHub: SPMapasie216182425
- * Desc: ElectiveRepository implementing from the Interface Repository.
- * Date: 29th August 2020
- */
+//package za.ac.cput.elective.repository.impl;
+
+ //* @author: Shane  Mapasie, GitHub: SPMapasie216182425
+ //* Desc: ElectiveRepository implementing from the Interface Repository.
+ //* Date: 29th August 2020
+
 import org.junit.Test;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
-public class ElectiveRepositoryImplTest {
+/*public class ElectiveRepositoryImplTest {
 
     private ElectiveRepository repository = new ElectiveRepositoryImpl();
     private Elective elective = ElectiveFactory.createElective("Python", "Similar to PHP");
@@ -59,4 +59,4 @@ public class ElectiveRepositoryImplTest {
     public void getAll() {
         System.out.println(repository.getAll());
     }
-}
+}*/
