@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Student;
 import za.ac.cput.elective.factory.StudentFactory;
 import za.ac.cput.elective.service.StudentService;
@@ -21,7 +22,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentServiceImplTest {
 
-    private static StudentService s = StudentServiceImpl.getStudentService();
+    @Autowired
+    private static StudentService s;
     private static Student st = StudentFactory.createStudent(2, "MM");
 
 
