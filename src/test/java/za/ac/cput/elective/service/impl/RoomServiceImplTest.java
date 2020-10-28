@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Room;
 import za.ac.cput.elective.factory.RoomFactory;
 import za.ac.cput.elective.service.RoomService;
@@ -20,7 +21,10 @@ import static org.junit.Assert.*;
 
 public class RoomServiceImplTest {
 
-    private static RoomService roomService = RoomServiceImpl.getRoomService();
+   
+
+    @Autowired
+    private static RoomService roomService;
     private static Room room = RoomFactory.createRoom("Room 1", 29);
 
     @Test
