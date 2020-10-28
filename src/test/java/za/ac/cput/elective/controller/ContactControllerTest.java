@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.factory.ContactFactory;
+
+import javax.swing.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -69,6 +72,8 @@ public class ContactControllerTest {
                 baseURL + "update",
                 contactUpdated,
                 Contact.class);
+
+        JOptionPane.showMessageDialog(null, "Testing\n"+updatedResponse.getBody().getEmailAdd());
 
         assertEquals(contact.getEmailAdd(),
                 updatedResponse.getBody().getEmailAdd());

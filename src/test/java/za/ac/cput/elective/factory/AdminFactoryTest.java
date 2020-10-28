@@ -10,7 +10,7 @@ import za.ac.cput.elective.entity.Admin;
 
 import static org.junit.Assert.*;
 
-public class AdminFactoryTest {
+public class  AdminFactoryTest {
 
     @Test
     public void buildAdmin() {
