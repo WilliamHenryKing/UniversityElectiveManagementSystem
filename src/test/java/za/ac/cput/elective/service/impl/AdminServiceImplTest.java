@@ -1,13 +1,15 @@
 package za.ac.cput.elective.service.impl;
 
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Admin;
 import za.ac.cput.elective.factory.AdminFactory;
 import za.ac.cput.elective.repository.AdminRepository;
-import za.ac.cput.elective.repository.impl.AdminRepositoryImpl;
 import za.ac.cput.elective.service.AdminService;
+
 
 import java.util.Set;
 
@@ -15,37 +17,41 @@ import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdminServiceImplTest {
-    private static AdminService service = AdminServiceImpl.getService();
-    private Admin admin = AdminFactory.buildAdmin("12","Ronnie");
+    @Autowired
+    private static AdminService service;
+    private AdminRepository repository;
+    private static Admin adminNew = AdminFactory.buildAdmin("007","Ron");
+
 
     @Test
     public void a_create() {
-        Admin ad = service.create(admin);
-        assertEquals(ad.getAdminID(),admin.getAdminID());
-    }
+        Admin newAd = service.create(adminNew);
+        Assert.assertEquals(newAd.getAdminID(), adminNew.getAdminID());
+        }
 
     @Test
     public void b_read() {
-
-        Admin read = service.read(admin.getAdminID());
-        System.out.println(read);
+        Admin get = service.read(adminNew.getAdminID());
+        Assert.assertNotNull(get);
     }
 
     @Test
     public void c_update() {
-        Admin update = new Admin.AdminBuilder().copy(admin).setAdminName("Ronald").build();
-        System.out.println(service.update(update));
+        Admin edit = new Admin.AdminBuilder().copy(adminNew).setAdminName("Ronny").build();
+        Assert.assertEquals(edit.getAdminName(),"Ronny");
     }
 
     @Test
-    public void e_delete() {
-        service.delete(admin.getAdminID());
+    public void delete() {
+    String id = adminNew.getAdminID();
+        this.repository.deleteById(id);
+
     }
+
 
     @Test
     public void d_getAll() {
-       Set<Admin> ad = service.getAll();
-       assertSame(ad,service.getAll());
-        System.out.println(ad);
+        Set<Admin> admins = service.getAll();
+        assertNotNull(admins);
     }
 }
