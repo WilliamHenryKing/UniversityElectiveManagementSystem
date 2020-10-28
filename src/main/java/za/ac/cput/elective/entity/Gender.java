@@ -2,6 +2,7 @@ package za.ac.cput.elective.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /**
  * @author @WilliamHenryKing
@@ -12,39 +13,27 @@ import javax.persistence.Id;
 @Entity
 public class Gender {
 
-    public enum genderIs {
-        MALE, FEMALE, UNDEFINED
-    }
-
     @Id
-    private genderIs genderID;
+    private char genderID;
 
     protected Gender() {}
 
     private Gender(Builder builder) {
         this.genderID = builder.genderID;
+
     }
 
     public char getGenderID() {
-        switch (genderID) {
-            case MALE:
-                return 'M';
-            case FEMALE:
-                return 'F';
-            case UNDEFINED:
-                return 'U';
-            default:
-                return '0';
-        }
+        return genderID;
     }
 
     public String getGenderDesc() {
         switch (genderID) {
-            case MALE:
+            case 'M':
                 return "Male";
-            case FEMALE:
+            case 'F':
                 return "Female";
-            case UNDEFINED:
+            case 'U':
                 return "Undefined";
             default:
                 return "0";
@@ -52,9 +41,9 @@ public class Gender {
     }
 
     public static class Builder {
-        private genderIs genderID;
+        private char genderID;
 
-        public Builder setGenderID(genderIs genderID) {
+        public Builder setGenderID(char genderID) {
             this.genderID = genderID;
             return this;
         }
@@ -75,4 +64,16 @@ public class Gender {
                 "\nGender: '" + getGenderDesc() + "'";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Gender gender = (Gender) o;
+        return genderID == gender.genderID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(genderID);
+    }
 }

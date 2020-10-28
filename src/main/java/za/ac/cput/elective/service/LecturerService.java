@@ -11,6 +11,6 @@ import java.util.Set;
  * Date: 2020/09/06
  **/
 
-public interface LecturerService extends IRepository<Lecturer, Long> {
+public interface LecturerService extends IService<Lecturer, Long> {
     Set<Lecturer> getAll();
 }
