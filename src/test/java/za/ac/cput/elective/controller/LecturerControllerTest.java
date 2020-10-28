@@ -1,7 +1,9 @@
 package za.ac.cput.elective.controller;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -17,11 +19,12 @@ import za.ac.cput.elective.factory.LecturerFactory;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class LecturerControllerTest {
 
-    private static Gender maleGender = GenderFactory.createGender(Gender.genderIs.MALE);
+    private static Gender maleGender = GenderFactory.createGender('M');
     private static Lecturer lecturer = LecturerFactory.createLecturer(621548793
             , "Anikwue"
             , "Arinze"
@@ -35,7 +38,7 @@ public class LecturerControllerTest {
     public void a_create() {
 
         ResponseEntity<Lecturer> postResponse = testRestTemplate.postForEntity(
-                baseURL + " create",
+                baseURL + "create",
                 lecturer,
                 Lecturer.class);
 
@@ -50,7 +53,7 @@ public class LecturerControllerTest {
     public void b_read() {
 
         ResponseEntity<Lecturer> showResponse = testRestTemplate.getForEntity(baseURL +
-                        " read/" +
+                        "read/" +
                         lecturer.getLecturerID(),
                 Lecturer.class);
 
@@ -68,7 +71,7 @@ public class LecturerControllerTest {
                 .build();
 
         ResponseEntity<Lecturer> updatedResponse = testRestTemplate.postForEntity(
-                baseURL + " update",
+                baseURL + "update",
                 lecturerUpdated,
                 Lecturer.class);
 
@@ -84,7 +87,7 @@ public class LecturerControllerTest {
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
         ResponseEntity<String> theResponse = testRestTemplate.exchange(
-                baseURL + " all",
+                baseURL + "all",
                 HttpMethod.GET,
                 stringHttpEntity,
                 String.class);

@@ -19,7 +19,7 @@ public class GenderController {
     @PostMapping("/create")
     public Gender create(@RequestBody Gender gender) {
 
-        Gender gender2 = GenderFactory.createGender(Gender.genderIs.valueOf(gender.getGenderDesc()));
+        Gender gender2 = GenderFactory.createGender(gender.getGenderID());
 
         return genderService.create(gender2);
 

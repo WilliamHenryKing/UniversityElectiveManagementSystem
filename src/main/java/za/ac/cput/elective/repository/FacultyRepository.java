@@ -1,8 +1,9 @@
 package za.ac.cput.elective.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.elective.entity.Faculty;
 
-import java.util.Set;
 
 /**
  * @author: Ridhaa Hendricks 218120966, GitHub: ridhaahendricks
@@ -10,6 +11,7 @@ import java.util.Set;
  * Date: 27th August 2020
  **/
 
-public interface FacultyRepository extends IRepository<Faculty, String>{
-    Set<Faculty> getAll();
+@Repository
+public interface FacultyRepository extends JpaRepository<Faculty, String>{
+
 }

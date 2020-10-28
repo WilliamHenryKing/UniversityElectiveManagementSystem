@@ -11,6 +11,7 @@ import java.util.Set;
  * Date: 2020/08/26
  **/
 
+/*
 public class StudentRepositoryImpl implements StudentRepository {
 
     private static StudentRepository studentRepository = null;
@@ -78,4 +79,4 @@ public class StudentRepositoryImpl implements StudentRepository {
 
         return this.studentDB;
     }
-}
+}*/

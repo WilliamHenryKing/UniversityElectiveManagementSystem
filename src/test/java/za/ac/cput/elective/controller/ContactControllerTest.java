@@ -1,7 +1,9 @@
 package za.ac.cput.elective.controller;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -12,9 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.factory.ContactFactory;
+
+import javax.swing.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class ContactControllerTest {
@@ -30,7 +36,7 @@ public class ContactControllerTest {
     public void a_create() {
 
         ResponseEntity<Contact> postResponse = testRestTemplate.postForEntity(
-                baseURL + " create",
+                baseURL + "create",
                 contact,
                 Contact.class);
 
@@ -45,7 +51,7 @@ public class ContactControllerTest {
     public void b_read() {
 
         ResponseEntity<Contact> showResponse = testRestTemplate.getForEntity(baseURL +
-                " read/" +
+                "read/" +
                 contact.getEmailAdd(),
                 Contact.class);
 
@@ -63,9 +69,11 @@ public class ContactControllerTest {
                 .build();
 
         ResponseEntity<Contact> updatedResponse = testRestTemplate.postForEntity(
-                baseURL + " update",
+                baseURL + "update",
                 contactUpdated,
                 Contact.class);
+
+        JOptionPane.showMessageDialog(null, "Testing\n"+updatedResponse.getBody().getEmailAdd());
 
         assertEquals(contact.getEmailAdd(),
                 updatedResponse.getBody().getEmailAdd());
@@ -79,7 +87,7 @@ public class ContactControllerTest {
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
         ResponseEntity<String> theResponse = testRestTemplate.exchange(
-                baseURL + " all",
+                baseURL + "all",
                 HttpMethod.GET,
                 stringHttpEntity,
                 String.class);

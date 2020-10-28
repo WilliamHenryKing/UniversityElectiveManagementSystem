@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.factory.GenderFactory;
@@ -22,9 +23,10 @@ import static org.junit.Assert.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GenderServiceImplTest {
 
-    private static GenderService genderService = GenderServiceImpl.getGenderService();
-    private static Gender.genderIs femaleGender = Gender.genderIs.FEMALE;
-    private static Gender originalGender = new GenderFactory().createGender(femaleGender);
+    @Autowired
+    private static GenderService genderService;
+
+    private static Gender originalGender = new GenderFactory().createGender('F'); // creates female gender
 
     @Test
     public void a_create() {
@@ -44,7 +46,7 @@ public class GenderServiceImplTest {
         Gender updated = new Gender
                 .Builder()
                 .copy(originalGender)
-                .setGenderID(Gender.genderIs.UNDEFINED) // changed from female to undefined
+                .setGenderID('U') // changed from female to undefined
                 .build();
 
         updated = genderService.update(updated);

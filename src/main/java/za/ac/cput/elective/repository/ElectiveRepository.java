@@ -1,7 +1,8 @@
 package za.ac.cput.elective.repository;
 
 import za.ac.cput.elective.entity.Elective;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Set;
  * Date: 26/08/2020
  **/
 
-public interface ElectiveRepository extends IRepository <Elective, String> {
-    Set<Elective> getAll();
+@Repository
+public interface ElectiveRepository extends JpaRepository<Elective, String> {
+
 }

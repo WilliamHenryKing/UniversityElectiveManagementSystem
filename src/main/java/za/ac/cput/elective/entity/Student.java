@@ -4,13 +4,20 @@ package za.ac.cput.elective.entity;
 Author: Sean Trainor 218060033
  */
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
+
+    @Id
+    private String studentID;
     private int year;
     private String stream;
-    private String studentID;
 
 
-    private Student(){}
+
+    protected Student(){}
 
     public Student(Builder b) {
         this.studentID = b.studentID;

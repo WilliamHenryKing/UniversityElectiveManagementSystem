@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.entity.Lecturer;
 import za.ac.cput.elective.factory.GenderFactory;
@@ -23,8 +24,10 @@ import static org.junit.Assert.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LecturerServiceImplTest {
 
-    private static LecturerService lecturerService = LecturerServiceImpl.getLecturerService();
-    private static Gender maleGender = GenderFactory.createGender(Gender.genderIs.MALE);
+    @Autowired
+    private static LecturerService lecturerService;
+
+    private static Gender maleGender = GenderFactory.createGender('M');
     private static Lecturer originalLecturer = LecturerFactory.createLecturer(621548793
             , "Anikwue"
             , "Arinze"

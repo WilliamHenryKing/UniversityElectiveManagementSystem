@@ -1,17 +1,26 @@
 package za.ac.cput.elective.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+
 /**
  * @author @WilliamHenryKing
  * Desc: Entity for Lecturer
  * Date: 2020/07/05
  **/
 
+@Entity
 public class Lecturer {
 
+    @Id
     private long lecturerID;
+
     private String lecturerLName;
     private String lecturerFName;
     private Gender gender;
+
+    protected Lecturer() {}
 
     private Lecturer(Builder builder) {
         this.lecturerID = builder.lecturerID;
@@ -81,7 +90,20 @@ public class Lecturer {
         return "Lecturer" +
                 "\nLecturerID: " + lecturerID +
                 "\nLecturerLName: " + lecturerLName +
-                "\nLecturerFName: " + lecturerFName +
-                "\nGender: " + gender;
+                "\nLecturerFName: " + lecturerFName
+                + "\nGender: " + gender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lecturer lecturer = (Lecturer) o;
+        return lecturerID == lecturer.lecturerID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lecturerID);
     }
 }

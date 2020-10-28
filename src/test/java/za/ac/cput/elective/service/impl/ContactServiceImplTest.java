@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.factory.ContactFactory;
 import za.ac.cput.elective.service.ContactService;
@@ -21,7 +22,9 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ContactServiceImplTest {
 
-    private static ContactService contactService = ContactServiceImpl.getContactService();
+    @Autowired
+    private static ContactService contactService;
+
     private static Contact originalContact = ContactFactory.createContact("215028546@mycput.ac.za",
             "0123456789", "0987654321");
 
