@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class LecturerControllerTest {
 
-    private static Gender maleGender = GenderFactory.createGender(Gender.genderIs.MALE);
+    private static Gender maleGender = GenderFactory.createGender('M');
     private static Lecturer lecturer = LecturerFactory.createLecturer(621548793
             , "Anikwue"
             , "Arinze"

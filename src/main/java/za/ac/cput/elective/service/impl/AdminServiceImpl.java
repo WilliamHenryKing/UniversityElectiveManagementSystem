@@ -1,51 +1,54 @@
 package za.ac.cput.elective.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Admin;
 import za.ac.cput.elective.repository.AdminRepository;
-import za.ac.cput.elective.repository.impl.AdminRepositoryImpl;
 import za.ac.cput.elective.service.AdminService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-    private static AdminService service = null;
+    
+    @Autowired
     private AdminRepository repository;
 
-    public AdminServiceImpl() {
-        this.repository = AdminRepositoryImpl.getAdminRepository();
-    }
-
-
-    public static AdminService getService() {
-        if (service == null) service = new AdminServiceImpl();
-        return service;
-
-    }
 
     @Override
     public Set<Admin> getAll() {
-        return this.repository.getAll();
+        return this.repository.findAll().stream().collect(Collectors.toSet());
     }
 
     @Override
-    public Admin create(Admin race) {
-        return this.create(race);
+    public Admin create(Admin admin) {
+        return this.create(admin);
     }
 
     @Override
     public Admin read(String id) {
-        return this.repository.read(id);
+        return this.repository.findById(id).orElse(null);
     }
 
     @Override
-    public Admin update(Admin race) {
-        return this.repository.update(race);
+    public Admin update(Admin admin) {
+        
+        if(this.repository.existsById(admin.getAdminID())){
+            return this.repository.save(admin);
+        }
+
+        return null;
     }
 
     @Override
     public boolean delete(String id) {
-        return this.repository.delete(id);
+               
+        this.repository.deleteById(id);
+        if(this.repository.existsById(id)){
+            return false;
+        }
+        return true;
+
     }
 }
