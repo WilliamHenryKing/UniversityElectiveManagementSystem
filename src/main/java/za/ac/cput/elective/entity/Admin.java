@@ -1,15 +1,22 @@
 package za.ac.cput.elective.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Author @plex303
  * Desc: Admin entity
  * Date: 4 July 2020
  */
 
+@Entity
 public class Admin {
+
+    @Id
     private String adminID;
     private String adminName;
 
-    private Admin(){}
+    protected Admin(){}
 
     public Admin(AdminBuilder builder) {
         this.adminID = builder.adminID;
