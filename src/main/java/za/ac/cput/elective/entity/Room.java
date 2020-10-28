@@ -1,14 +1,21 @@
 package za.ac.cput.elective.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /*
  * @author          : Sinethemba Poni 213276968
  * Desc             : Romm.java class with its attributes using the Builder pattern
  * Date             : 5 July 2020
  */
+@Entity
+
 public class Room {
+    @Id
     private String roomNum;
     private int roomNumSeats;
 
-    private Room (){}
+    protected Room (){}
 
     private Room(Builder builder) {
         this.roomNum = builder.roomNum;
