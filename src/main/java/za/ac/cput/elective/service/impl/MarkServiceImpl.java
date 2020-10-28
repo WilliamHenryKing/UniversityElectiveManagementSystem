@@ -6,58 +6,61 @@ package za.ac.cput.elective.service.impl;
  * Date: 6 September 2020
  **/
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.elective.entity.Mark;
 import za.ac.cput.elective.repository.MarkRepository;
-import za.ac.cput.elective.repository.impl.MarkRepositoryImpl;
 import za.ac.cput.elective.service.MarkService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MarkServiceImpl implements MarkService
 {
-    private static MarkService service = null;
+    @Autowired
     private MarkRepository repository;
 
-    private MarkServiceImpl()
-    {
-        this.repository = MarkRepositoryImpl.getRepository();
-    }
-
-    public static MarkService getService()
-    {
-        if (service == null) service = new MarkServiceImpl();
-        return service;
-    }
 
     @Override
     public Set<Mark> getAll()
     {
-        return this.repository.getAll();
+        return this.repository.findAll().stream().collect(Collectors.toSet());
     }
 
     @Override
     public Mark create(Mark mark)
     {
-        return this.repository.create(mark);
+        return this.repository.save(mark);
     }
 
     @Override
     public Mark read(String s)
     {
-        return this.repository.read(s);
+        return this.repository.findById(s).orElseGet(null);
     }
 
     @Override
     public Mark update(Mark mark)
     {
-        return this.repository.update(mark);
+        if (this.repository.existsById(mark.getMarksID()))
+        {
+            return this.repository.save(mark);
+        }
+            return null;
     }
 
     @Override
     public boolean delete(String s)
     {
-        return this.repository.delete(s);
+        this.repository.deleteById(s);
+        if (this.repository.existsById(s))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
