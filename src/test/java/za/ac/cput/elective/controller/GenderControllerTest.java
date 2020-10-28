@@ -22,8 +22,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class GenderControllerTest {
 
-    private static Gender.genderIs femaleGender = Gender.genderIs.FEMALE;
-    private static Gender gender = new GenderFactory().createGender(femaleGender);
+    private static Gender gender = new GenderFactory().createGender('F'); // creates female gender
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -48,11 +47,17 @@ public class GenderControllerTest {
     public void b_read() {
 
         ResponseEntity<Gender> showResponse = testRestTemplate.getForEntity(baseURL +
-                        "read/" +
+                        "read" +
                         gender.getGenderID(),
                 Gender.class);
 
+        System.out.println("Expected: " + gender.getGenderID()
+                + "\nActual: " + showResponse.getBody().getGenderID());
+
         assertEquals(gender.getGenderID(), showResponse.getBody().getGenderID());
+
+        System.out.println("Expected: " + gender.getGenderID()
+                + "\nActual: " + showResponse.getBody().getGenderID());
 
     }
 
@@ -62,7 +67,7 @@ public class GenderControllerTest {
         Gender genderUpdated = new Gender
                 .Builder()
                 .copy(gender)
-                .setGenderID(Gender.genderIs.UNDEFINED)
+                .setGenderID('U')
                 .build();
 
         ResponseEntity<Gender> updatedResponse = testRestTemplate.postForEntity(

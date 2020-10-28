@@ -27,7 +27,7 @@ public class LecturerServiceImplTest {
     @Autowired
     private static LecturerService lecturerService;
 
-    private static Gender maleGender = GenderFactory.createGender(Gender.genderIs.MALE);
+    private static Gender maleGender = GenderFactory.createGender('M');
     private static Lecturer originalLecturer = LecturerFactory.createLecturer(621548793
             , "Anikwue"
             , "Arinze"

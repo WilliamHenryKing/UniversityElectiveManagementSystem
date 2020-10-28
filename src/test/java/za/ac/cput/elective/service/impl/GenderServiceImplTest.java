@@ -26,8 +26,7 @@ public class GenderServiceImplTest {
     @Autowired
     private static GenderService genderService;
 
-    private static Gender.genderIs femaleGender = Gender.genderIs.FEMALE;
-    private static Gender originalGender = new GenderFactory().createGender(femaleGender);
+    private static Gender originalGender = new GenderFactory().createGender('F'); // creates female gender
 
     @Test
     public void a_create() {
@@ -47,7 +46,7 @@ public class GenderServiceImplTest {
         Gender updated = new Gender
                 .Builder()
                 .copy(originalGender)
-                .setGenderID(Gender.genderIs.UNDEFINED) // changed from female to undefined
+                .setGenderID('U') // changed from female to undefined
                 .build();
 
         updated = genderService.update(updated);

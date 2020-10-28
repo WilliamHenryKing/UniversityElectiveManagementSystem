@@ -10,10 +10,10 @@ import za.ac.cput.elective.entity.Gender;
 
 public class GenderFactory {
 
-    public static Gender createGender(Gender.genderIs genderIs) {
+    public static Gender createGender(char genderID) {
 
         return new Gender.Builder()
-                .setGenderID(genderIs)
+                .setGenderID(genderID)
                 .build();
     }
 
