@@ -40,20 +40,20 @@ public class ElectiveServiceImpl implements ElectiveService {
    }
 
     @Override
-    public Elective read(String s) {
+    public Elective read(Long s) {
         return this.eRepo.findById(s).orElseGet(null);
     }
 
     @Override
     public Elective update(Elective elective) {
-        if(this.eRepo.existsById(elective.getElectName())) {
+        if(this.eRepo.existsById(elective.getElectCode())) {
             return this.eRepo.save(elective);
         }
         return null;
     }
 
     @Override
-    public boolean delete(String s) {
+    public boolean delete(Long s) {
         this.eRepo.deleteById(s);
         return !this.eRepo.existsById(s);
     }
