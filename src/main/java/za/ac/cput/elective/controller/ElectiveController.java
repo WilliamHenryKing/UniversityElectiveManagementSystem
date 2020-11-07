@@ -31,7 +31,7 @@ public class ElectiveController {
     }
 
     @GetMapping("/read/{electName}")
-    public Elective read(@PathVariable String electName){
+    public Elective read(@PathVariable String electName){ //fix from here
         return electiveService.read(electName);
     }
 
