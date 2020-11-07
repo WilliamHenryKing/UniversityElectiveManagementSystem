@@ -4,8 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.elective.entity.Contact;
 
-import java.util.Set;
-
 /**
  * @author @WilliamHenryKing
  * Desc: Interface for ContactRepository
