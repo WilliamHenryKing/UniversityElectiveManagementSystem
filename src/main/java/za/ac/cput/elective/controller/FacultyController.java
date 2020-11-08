@@ -29,9 +29,9 @@ public class FacultyController {
         return facultyService.create(facu);
     }
     
-    @RequestMapping(value = "/show/{name}", method = {RequestMethod.GET})
-    public Faculty show(@PathVariable String name){
-        return facultyService.read(name);
+    @RequestMapping(value = "/show/{id}", method = {RequestMethod.GET})
+    public Faculty show(@PathVariable String facID){
+        return facultyService.read(facID);
     }
 
     @RequestMapping(value = "/change/{id}/{name}", method = {RequestMethod.PATCH})

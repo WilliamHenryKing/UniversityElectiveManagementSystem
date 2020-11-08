@@ -6,6 +6,7 @@ Author: Sean Trainor 218060033
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Student {
@@ -79,5 +80,18 @@ public class Student {
             return new Student(this);
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student s = (Student) o;
+        return studentID.equals(s.studentID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentID);
     }
 }
