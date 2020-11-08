@@ -27,10 +27,6 @@ class MarkControllerTest
 
     private static final String baseURL = "http://localhost:8080/mark";
 
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     @Test
     void create()
     {
