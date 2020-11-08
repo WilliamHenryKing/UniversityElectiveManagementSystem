@@ -22,17 +22,19 @@ public class ElectiveController {
 
     @PostMapping("/create")
     public Elective create(@RequestBody Elective elective){
-        Elective elect = ElectiveFactory.createElective(
-                elective.getElectName(),
-                elective.getElectDesc());
+
+       Elective elect = ElectiveFactory.createElective(
+                elective.getElectCode(),
+                elective.getElectName());
+
 
         return electiveService.create(elect);
 
     }
 
-    @GetMapping("/read/{electName}")
-    public Elective read(@PathVariable String electName){ //fix from here
-        return electiveService.read(electName);
+    @GetMapping("/read/{electCode}")
+    public Elective read(@PathVariable Long electCode){ //fix from here
+        return electiveService.read(electCode);
     }
 
 
@@ -47,9 +49,9 @@ public class ElectiveController {
         return electiveService.getAll();
     }
 
-    @DeleteMapping("/delete/{electName}")
-    public boolean delete(@PathVariable String electName){
-        return electiveService.delete(electName);
+    @DeleteMapping("/delete/{electCode}")
+    public boolean delete(@PathVariable Long electCode){
+        return electiveService.delete(electCode);
     }
 
 }

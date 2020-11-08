@@ -15,7 +15,9 @@ import static org.junit.Assert.*;
 
 /*public class ElectiveRepositoryImplTest {
     private ElectiveRepository repository = new ElectiveRepositoryImpl();
-    private Elective elective = ElectiveFactory.createElective("Python", "Similar to PHP");
+
+    private Elective elective = ElectiveFactory.createElective((long) 000111, "E-Commerce");
+
     @Test
     public void create() {
         Elective created = repository.create(elective);

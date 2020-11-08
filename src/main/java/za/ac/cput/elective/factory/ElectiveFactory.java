@@ -6,12 +6,10 @@ import java.util.*;
 public class ElectiveFactory {
 
 
-    public static Elective createElective(String electName, String electDesc) {
-        String electCode = UUID.randomUUID().toString();
+    public static Elective createElective(long electCode, String electName) {
         Elective elect = new Elective.Builder()
-                .setElectName(electCode)
+                .setElectCode(electCode)
                 .setElectName(electName)
-                .setElectDesc(electDesc)
                 .build();
         return elect;
     }
