@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 
 public class RoomServiceImplTest {
 
-   
+
 
     @Autowired
     private static RoomService roomService;

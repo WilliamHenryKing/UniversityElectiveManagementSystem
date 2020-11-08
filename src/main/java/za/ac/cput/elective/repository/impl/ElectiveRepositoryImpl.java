@@ -1,10 +1,5 @@
 //package za.ac.cput.elective.repository.impl;
 
-import za.ac.cput.elective.entity.Elective;
-import za.ac.cput.elective.repository.ElectiveRepository;
-
-import java.util.*;
-
 
 
 /*public class  ElectiveRepositoryImpl implements ElectiveRepository{

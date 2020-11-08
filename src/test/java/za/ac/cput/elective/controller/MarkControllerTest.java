@@ -17,15 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MarkControllerTest
 {
+
     private static Mark m = MarkFactory.createMark("001");
     private static String SECURITY_USERNAME = "doozy";
     private static String SECURITY_PASSWORD = "doozy1";
 
     @Autowired
     private TestRestTemplate restTemplate;
+
     private static final String baseURL = "http://localhost:8080/mark";
 
 
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     void create()

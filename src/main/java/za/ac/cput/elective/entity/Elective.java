@@ -10,22 +10,22 @@ import javax.persistence.Id;
  */
 
 
- @Entity
+@Entity
 public class Elective  {
 
     /* Encapsulation */
     @Id
     private long electCode;
     private String electName;
-    private String electDesc;
 
+    /*No argument constructor, protected*/
     protected Elective(){};
 
     /* constructor */
     private Elective(Builder b) {
         this.electName = b.electName;
         this.electCode = b.electCode;
-        this.electDesc = b.electDesc;
+
     }
 
     //getters
@@ -33,21 +33,17 @@ public class Elective  {
         return electName;
     }
 
-    public long getElectCode() {
+    public Long getElectCode() {
         return electCode;
     }
 
-    public String getElectDesc() {
-        return electDesc;
-    }
 
     //toString Method
     @Override
     public String toString() {
         return "Elective{" +
                 "Elective Name=" + electName +
-                ", Elective Code=" + electCode +
-                ", Elective Description='" + electDesc + '\'' +
+                ", Elective Code=" + electCode + '\'' +
                 '}';
     }
 
@@ -55,7 +51,6 @@ public class Elective  {
 
         private String electName;
         private long electCode;
-        private String electDesc;
 
         /* setters using builder */
         public Builder setElectName(String electName) {
@@ -68,16 +63,10 @@ public class Elective  {
             return this;
         }
 
-        public Builder setElectDesc(String electDesc) {
-            this.electDesc = electDesc;
-            return this;
-        }
-
         /*Constructor with Builder Implemented*/
         public Builder copy(Elective elect) {
             this.electName = elect.electName;
             this.electCode = elect.electCode;
-            this.electDesc = elect.electDesc;
             return this;
         }
 

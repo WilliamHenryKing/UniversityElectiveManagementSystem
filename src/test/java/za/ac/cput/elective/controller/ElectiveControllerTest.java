@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
 
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
@@ -24,9 +22,9 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 
- public class ElectiveControllerTest {
+public class ElectiveControllerTest {
 
-    private Elective elective = ElectiveFactory.createElective("BA","Data Structures");
+    private Elective elective = ElectiveFactory.createElective(0000155, "Data Structures");
     @Autowired
     private TestRestTemplate restTemplate;
     private String baseURL = "http://localhost:8080/elective/";
@@ -42,19 +40,19 @@ import static org.junit.Assert.*;
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         System.out.println("Saved data:" + elective);
-        assertEquals(elective.getElectName(), postResponse.getBody().getElectName());
+        assertEquals(elective.getElectCode(), postResponse.getBody().getElectCode());
     }
 
 
     @Test
     public void b_read() {
 
-        String url = baseURL + "read/" + elective.getElectName();
+        String url = baseURL + "read/" + elective.getElectCode();
         System.out.println(url);
         ResponseEntity<Elective> response = restTemplate.getForEntity(url, Elective.class);
 
         System.out.println(response.getBody());
-        assertEquals(elective.getElectName(), response.getBody().getElectName());
+        assertEquals(elective.getElectCode(), response.getBody().getElectCode());
         System.out.println("READ:" +response);
 
     }
@@ -64,18 +62,18 @@ import static org.junit.Assert.*;
 
         Elective update = new Elective.Builder()
                 .copy(elective)
-                .setElectName("BNA")
+                .setElectCode(0000155)
                 .build();
         String url = baseURL +"modify";
         ResponseEntity<Elective> responseEntity = restTemplate.postForEntity(url, update, Elective.class);
-        assertNotNull(elective.getElectName(), responseEntity.getBody().getElectName());
+        assertNotNull(String.valueOf(elective.getElectCode()), responseEntity.getBody().getElectCode());
         System.out.println("Modified..." +responseEntity.getBody());
 
     }
 
     @Test
     public void d_delete(){
-        String url = baseURL + "delete/"+ "  " + elective.getElectName() + "  and: " + elective.getElectDesc();
+        String url = baseURL + "delete/"+ "  " + elective.getElectCode() + "  and: " + elective.getElectName();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
         /*Works!!! it actually deletes the details created.*/

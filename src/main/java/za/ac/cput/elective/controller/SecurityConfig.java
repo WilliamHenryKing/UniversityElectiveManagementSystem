@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("student")
                 .password(passwordEncoder().encode("password"))
                 .roles(USER);
+
     }
 
     @Override

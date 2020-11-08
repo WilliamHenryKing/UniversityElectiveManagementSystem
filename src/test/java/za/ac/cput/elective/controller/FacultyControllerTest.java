@@ -9,19 +9,22 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Faculty;
 import za.ac.cput.elective.factory.FacultyFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class FacultyControllerTest {
 
-    private static Faculty facu = FacultyFactory.addFaculty("1234", "ENgineeering");
+    private static Faculty facu = FacultyFactory.addFaculty("4321", "E-Commeence");
+    private static String SECURITY_USERNAME = "student";
+    private static String SECURITY_PASSWORD = "password";
 
     @Autowired
     private TestRestTemplate tRestTemp;
@@ -30,7 +33,8 @@ public class FacultyControllerTest {
     @Test
     public void a_create() {
 
-        ResponseEntity<Faculty> postResponse = tRestTemp.postForEntity(baseURL + "create", facu,
+        ResponseEntity<Faculty> postResponse = tRestTemp.withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(baseURL + "create", facu,
                 Faculty.class);
 
         int num = Integer.parseInt(facu.getFacultyID());
@@ -43,10 +47,11 @@ public class FacultyControllerTest {
     @Test
     public void b_show() {
 
-        ResponseEntity<Faculty> getResponse = tRestTemp.getForEntity(baseURL + "show/" + facu.getFacultyID(),
+        ResponseEntity<Faculty> getResponse = tRestTemp.withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(baseURL + "show/" + facu.getFacultyID(),
                 Faculty.class);
 
-        assertEquals(facu.getFacultyID(), getResponse.getBody().getFacultyID());
+        assertEquals(getResponse.getBody().getFacultyID(), facu.getFacultyID());
         System.out.println(getResponse.getBody());
 
     }
@@ -56,7 +61,8 @@ public class FacultyControllerTest {
 
         String old = facu.getFacultyName();
         Faculty changed = new Faculty.Builder().copy(facu).setFacultyName("Engineering").build();
-        ResponseEntity<Faculty> changedResponse = tRestTemp.postForEntity(baseURL + "change", facu,
+        ResponseEntity<Faculty> changedResponse = tRestTemp.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD)
+                .postForEntity(baseURL + "change", facu,
                 Faculty.class);
         assertNotEquals(old, changedResponse.getBody().getFacultyID());
         System.out.println("Changed: " + changed);
@@ -64,29 +70,29 @@ public class FacultyControllerTest {
 
     @Test
     public void d_showAll() {
-        /**
         // struggled to find another way to show all using SpringBootTest
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> hEntity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> exchangeResponse = tRestTemp.exchange(baseURL + "all", HttpMethod.GET, hEntity,
+        ResponseEntity<String> exchangeResponse = tRestTemp.withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .exchange(baseURL + "all", HttpMethod.GET, hEntity,
                 String.class);
 
         System.out.println(exchangeResponse);
         System.out.println(exchangeResponse.getBody());
-        */
 
-        ResponseEntity<Faculty> getResponse = tRestTemp.getForEntity(baseURL + "showAll/" + facu.getFacultyID(),
+       /* ResponseEntity<Faculty> getResponse = tRestTemp.getForEntity(baseURL + "showAll/" + facu.getFacultyID(),
                 Faculty.class);
 
         assertEquals(facu.getFacultyID(), getResponse.getBody().getFacultyID());
-        System.out.println(getResponse.getBody());
+        System.out.println(getResponse.getBody()); */
 
     }
 
     @Test
     public void e_delete() {
-        tRestTemp.delete(baseURL + "delete/" + facu.getFacultyID());
+        tRestTemp.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD)
+                .delete(baseURL + "delete/" + facu.getFacultyID());
         System.out.println(facu.getFacultyID() +  ", " + facu.getFacultyName());
     }
 }
