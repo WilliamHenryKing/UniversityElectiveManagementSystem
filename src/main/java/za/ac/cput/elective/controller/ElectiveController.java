@@ -22,9 +22,11 @@ public class ElectiveController {
 
     @PostMapping("/create")
     public Elective create(@RequestBody Elective elective){
+
        Elective elect = ElectiveFactory.createElective(
                 elective.getElectCode(),
                 elective.getElectName());
+
 
         return electiveService.create(elect);
 
@@ -53,4 +55,3 @@ public class ElectiveController {
     }
 
 }
-

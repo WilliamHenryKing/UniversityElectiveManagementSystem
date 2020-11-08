@@ -13,31 +13,29 @@ import java.util.stream.Collectors;
  * Desc: Created ElectiveServiceImpl which extends ElectiveService
  * Date: 06/09/2020
  **/
-    @Service
+@Service
 public class ElectiveServiceImpl implements ElectiveService {
 
     private static ElectiveService eService = null;
     @Autowired
     private ElectiveRepository eRepo;
-   /*
-    private ElectiveServiceImpl(){
-        this.eRepo = ElectiveRepositoryImpl.getRepository();
+    /*
+     private ElectiveServiceImpl(){
+         this.eRepo = ElectiveRepositoryImpl.getRepository();
+     }
+     public static ElectiveService getElectiveService(){
+         if (eService == null){
+             eService = new ElectiveServiceImpl();
+         }
+         return eService;
+     }
+   */
+    @Override
+    public Elective create(Elective elective) {
+
+        return this.eRepo.save(elective);
+
     }
-
-    public static ElectiveService getElectiveService(){
-        if (eService == null){
-            eService = new ElectiveServiceImpl();
-        }
-
-        return eService;
-    }
-  */
-   @Override
-   public Elective create(Elective elective) {
-
-       return this.eRepo.save(elective);
-
-   }
 
     @Override
     public Elective read(Long s) {

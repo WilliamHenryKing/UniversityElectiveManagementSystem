@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 
- public class ElectiveControllerTest {
+public class ElectiveControllerTest {
 
     private Elective elective = ElectiveFactory.createElective(0000155, "Data Structures");
     @Autowired
