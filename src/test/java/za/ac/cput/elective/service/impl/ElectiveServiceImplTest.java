@@ -3,15 +3,11 @@ package za.ac.cput.elective.service.impl;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
 import za.ac.cput.elective.service.ElectiveService;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author @ShanePhumlaniMapasie
@@ -24,7 +20,7 @@ public class ElectiveServiceImplTest {
 
     @Autowired
     private static ElectiveService eService;
-    private static Elective elect = ElectiveFactory.createElective("Javascript", "Is a text-based programming Lang..,");
+    private static Elective elect = ElectiveFactory.createElective(000110, "JavaScript");
 
     @Test
     public void a_create() {
@@ -38,7 +34,7 @@ public class ElectiveServiceImplTest {
     public void b_read() {
 
         Elective elec = eService.create(elect);
-        eService.read(elec.getElectName());
+        eService.read(elec.getElectCode());
         System.out.println(elec);
     }
 
@@ -46,7 +42,7 @@ public class ElectiveServiceImplTest {
     public void c_update() {
         Elective e = new Elective.Builder()
                 .copy(elect)
-                .setElectName("Android")
+                .setElectCode(000111)
                 .build();
         e = eService.update(e);
         System.out.println(e);
@@ -54,7 +50,7 @@ public class ElectiveServiceImplTest {
 
     @Test
     public void e_delete() {
-        boolean erased = eService.delete(elect.getElectName());
+        boolean erased = eService.delete(elect.getElectCode());
         Assert.assertTrue(erased);
         if (erased = true ){
             System.out.println("Elective successfully deleted");
