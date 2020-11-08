@@ -14,7 +14,9 @@ public class MarkFactory
     public  static Mark createMark (String marksID)
     {
         //String marksID = IDGenerator.generateId();
-        Mark mark = new Mark.Builder().setMarksID(marksID).build();
+        Mark mark = new Mark.Builder()
+                .setMarksID(marksID)
+                .build();
         return mark;
     }
 }
