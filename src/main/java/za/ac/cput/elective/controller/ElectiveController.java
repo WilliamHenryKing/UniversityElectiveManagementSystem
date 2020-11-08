@@ -30,9 +30,9 @@ public class ElectiveController {
 
     }
 
-    @GetMapping("/read/{electName}")
-    public Elective read(@PathVariable String electName){
-        return electiveService.read(electName);
+    @GetMapping("/read/{electCode}")
+    public Elective read(@PathVariable Long electCode){ //fix from here
+        return electiveService.read(electCode);
     }
 
 
@@ -47,9 +47,9 @@ public class ElectiveController {
         return electiveService.getAll();
     }
 
-    @DeleteMapping("/delete/{electName}")
-    public boolean delete(@PathVariable String electName){
-        return electiveService.delete(electName);
+    @DeleteMapping("/delete/{electCode}")
+    public boolean delete(@PathVariable Long electCode){
+        return electiveService.delete(electCode);
     }
 
 }
