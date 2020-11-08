@@ -25,6 +25,10 @@ public class RoomControllerTest {
 
     private static Room room = RoomFactory.createRoom("Room one", 34);
 
+    public static String SECURITY_USERNAME = "admin";
+    public static String SECURITY_PASSWORD = "psw";
+
+
     @Autowired
     private TestRestTemplate restTemplate;
     private String baseURL = "http://localhost:8080/room/";
@@ -32,42 +36,47 @@ public class RoomControllerTest {
     @Test
     public void a_create() {
 
-        String url = baseURL + "create";
-        System.out.println("URL" + url);
-        System.out.println("Post data" + room);
+                String url = baseURL + "create";
+                System.out.println("URL" + url);
+                System.out.println("Post data" + room);
 
-        ResponseEntity<Room> postResponse = restTemplate.postForEntity(url, room, Room.class);
-        assertNotNull(postResponse);
-        assertNotNull(postResponse.getBody());
-        System.out.println("Saved data:" + room);
-        assertEquals(room.getRoomNum(), postResponse.getBody().getRoomNum());
+                ResponseEntity<Room> postResponse = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, room, Room.class);
 
 
-
+                 assertNotNull(postResponse);
+                 assertNotNull(postResponse.getBody());
+                 System.out.println("Saved data:" + room);
+                 assertEquals(room.getRoomNum(), postResponse.getBody().getRoomNum());
 
     }
 
     @Test
     public void b_read() {
 
-        String url = baseURL + "read/" +room.getRoomNum();
-        System.out.println(url);
-        ResponseEntity<Room> response = restTemplate.getForEntity(url, Room.class);
+                String url = baseURL + "read/" +room.getRoomNum();
+                System.out.println(url);
+                ResponseEntity<Room> response = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Room.class);
 
-        System.out.println(response.getBody());
-        assertEquals(room.getRoomNum(), response.getBody().getRoomNum());
-        System.out.println("Added data:" +response);
+                System.out.println(response.getBody());
+                assertEquals(room.getRoomNum(), response.getBody().getRoomNum());
+                System.out.println("Added data:" +response);
 
     }
 
     @Test
     public void c_update() {
 
-        Room update = new Room.Builder().copy(room).setRoomNum("Room 1").build();
-        String url = baseURL +"update";
-        ResponseEntity<Room> responseEntity = restTemplate.postForEntity(url, update, Room.class);
-        assertNotNull(room.getRoomNum(), responseEntity.getBody().getRoomNum());
-        System.out.println("Successfully updated..." +responseEntity.getBody());
+                Room update = new Room.Builder().copy(room).setRoomNum("Room 1").build();
+                String url = baseURL +"update";
+                ResponseEntity<Room> responseEntity = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, update, Room.class);
+                assertNotNull(room.getRoomNum(), responseEntity.getBody().getRoomNum());
+                System.out.println("Successfully updated..." +responseEntity.getBody());
 
 
     }
@@ -75,21 +84,24 @@ public class RoomControllerTest {
     @Test
     public void d_getAll() {
 
+                String url = baseURL + "all";
+                HttpHeaders hHeades = new HttpHeaders();
+                HttpEntity<String> entity = new HttpEntity<>(null, hHeades);
+                ResponseEntity<String> response = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
 
-        String url = baseURL + "all";
-        HttpHeaders hHeades = new HttpHeaders();
-        HttpEntity<String> entity = new HttpEntity<>(null, hHeades);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-        System.out.println(response);
-        System.out.println(response.getBody());
+                System.out.println(response);
+                System.out.println(response.getBody());
 
     }
 
     @Test
     public void f_delete() {
-        String url = baseURL + "delete/" + room.getRoomNum();
-        restTemplate.delete(url);
+                String url = baseURL + "delete/" + room.getRoomNum();
+                restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .delete(url);
 
     }
 }
