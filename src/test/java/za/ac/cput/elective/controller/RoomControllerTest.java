@@ -25,8 +25,8 @@ public class RoomControllerTest {
 
     private static Room room = RoomFactory.createRoom("Room one", 34);
 
-    public static String SECURITY_USERNAME = "admin";
-    public static String SECURITY_PASSWORD = "psw";
+    public static String SECURITY_USERNAME = "doozy";
+    public static String SECURITY_PASSWORD = "doozy1";
 
 
     @Autowired
