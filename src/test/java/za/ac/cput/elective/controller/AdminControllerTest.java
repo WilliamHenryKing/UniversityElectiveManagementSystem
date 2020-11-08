@@ -19,6 +19,8 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class AdminControllerTest {
+    private static String userName ="admin";
+    private static String secPassWord = "psw";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -28,7 +30,7 @@ public class AdminControllerTest {
     @Test
     public void create() {
         String url = baseURL + "create";
-        ResponseEntity<Admin> a = restTemplate.postForEntity(url, ad, Admin.class);
+        ResponseEntity<Admin> a = restTemplate.withBasicAuth(userName,secPassWord).postForEntity(url, ad, Admin.class);
 
         assertNotNull(ad);
         assertNotNull(a.getBody());
@@ -38,7 +40,7 @@ public class AdminControllerTest {
     @Test
     public void read() {
         String url = baseURL + "read/" + ad.getAdminID();
-        ResponseEntity<Admin> re = restTemplate.getForEntity(url, Admin.class);
+        ResponseEntity<Admin> re = restTemplate.withBasicAuth(userName,secPassWord).getForEntity(url, Admin.class);
         assertEquals(ad.getAdminID(), re.getBody().getAdminID());
     }
 
@@ -46,7 +48,7 @@ public class AdminControllerTest {
     public void update() {
         Admin up = new Admin.AdminBuilder().copy(ad).setAdminID("5").build();
         String url = baseURL + "update";
-        ResponseEntity<Admin> ren = restTemplate.postForEntity(url, up, Admin.class);
+        ResponseEntity<Admin> ren = restTemplate.withBasicAuth(userName,secPassWord).postForEntity(url, up, Admin.class);
         assertEquals(ad.getAdminID(), ren.getBody().getAdminID());
     }
 
@@ -61,7 +63,7 @@ public class AdminControllerTest {
         String url = baseURL + "all";
         HttpHeaders h = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, h);
-        ResponseEntity<String> ren = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> ren = restTemplate.withBasicAuth(userName,secPassWord).exchange(url, HttpMethod.GET, entity, String.class);
 
         System.out.println(ren);
         System.out.println(ren.getBody());
