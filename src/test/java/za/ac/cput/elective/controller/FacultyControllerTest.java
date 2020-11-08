@@ -2,7 +2,6 @@ package za.ac.cput.elective.controller;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -22,7 +21,7 @@ import static org.junit.Assert.assertNotEquals;
 @RunWith(SpringRunner.class)
 public class FacultyControllerTest {
 
-    private static Faculty facu = FacultyFactory.addFaculty("4321", "E-Commeence");
+    private static Faculty facu = FacultyFactory.addFaculty("4321", "E-Commerce");
     private static String SECURITY_USERNAME = "student";
     private static String SECURITY_PASSWORD = "password";
 
