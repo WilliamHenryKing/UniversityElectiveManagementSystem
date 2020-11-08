@@ -10,7 +10,7 @@ import javax.persistence.Id;
  */
 
 
- @Entity
+@Entity
 public class Elective  {
 
     /* Encapsulation */
