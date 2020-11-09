@@ -2,11 +2,8 @@ package za.ac.cput.elective.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.elective.entity.Contact;
 import za.ac.cput.elective.entity.Lecturer;
-import za.ac.cput.elective.factory.ContactFactory;
 import za.ac.cput.elective.factory.LecturerFactory;
-import za.ac.cput.elective.service.impl.ContactServiceImpl;
 import za.ac.cput.elective.service.impl.LecturerServiceImpl;
 
 import java.util.Set;
@@ -24,7 +21,7 @@ public class LecturerController {
         Lecturer lecturer2 = LecturerFactory.createLecturer(lecturer.getLecturerID(),
                 lecturer.getLecturerLName(),
                 lecturer.getLecturerFName(),
-                lecturer.getGender());
+                lecturer.getGenderID());
 
         return lecturerService.create(lecturer2);
 

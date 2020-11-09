@@ -11,6 +11,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.entity.Lecturer;
@@ -24,11 +27,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class LecturerControllerTest {
 
-    private static Gender maleGender = GenderFactory.createGender('M');
     private static Lecturer lecturer = LecturerFactory.createLecturer(621548793
             , "Anikwue"
             , "Arinze"
-            , maleGender);
+            , 'M');
+
+    private static String username_admin_security = "admin";
+    private static String password_admin_security = "psw";
+
+    private static String username_lecturer_security = "lecturer";
+    private static String password_lecturer_security = "password2";
+
+    private static String username_student_security = "student";
+    private static String password_student_security = "password";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -37,7 +48,10 @@ public class LecturerControllerTest {
     @Test
     public void a_create() {
 
-        ResponseEntity<Lecturer> postResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Lecturer> postResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .postForEntity(
                 baseURL + "create",
                 lecturer,
                 Lecturer.class);
@@ -52,7 +66,11 @@ public class LecturerControllerTest {
     @Test
     public void b_read() {
 
-        ResponseEntity<Lecturer> showResponse = testRestTemplate.getForEntity(baseURL +
+        ResponseEntity<Lecturer> showResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .withBasicAuth(username_student_security, password_student_security)
+                .getForEntity(baseURL +
                         "read/" +
                         lecturer.getLecturerID(),
                 Lecturer.class);
@@ -70,13 +88,19 @@ public class LecturerControllerTest {
                 .setLecturerID(62228514)
                 .build();
 
-        ResponseEntity<Lecturer> updatedResponse = testRestTemplate.postForEntity(
-                baseURL + "update",
+        ResponseEntity<Lecturer> updatedResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .postForEntity(
+                baseURL + "update/",
                 lecturerUpdated,
                 Lecturer.class);
 
         assertEquals(lecturer.getLecturerID(),
                 updatedResponse.getBody().getLecturerID());
+
+        System.out.println(lecturer.getLecturerID() +"\n"
+                        + updatedResponse.getBody().getLecturerID());
 
     }
 
@@ -86,19 +110,23 @@ public class LecturerControllerTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
-        ResponseEntity<String> theResponse = testRestTemplate.exchange(
+        ResponseEntity<String> theResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .exchange(
                 baseURL + "all",
                 HttpMethod.GET,
                 stringHttpEntity,
                 String.class);
 
-        System.out.println(theResponse);
+        System.out.println(theResponse+"\n");
         System.out.println(theResponse.getBody());
 
     }
 
     @Test
     public void e_delete() {
-        testRestTemplate.delete(baseURL + "delete/" + lecturer.getLecturerID());
+        testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .delete(baseURL + "delete/" + lecturer.getLecturerID());
     }
 }
