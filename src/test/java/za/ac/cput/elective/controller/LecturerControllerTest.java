@@ -48,7 +48,6 @@ public class LecturerControllerTest {
         ResponseEntity<Lecturer> postResponse = testRestTemplate
                 .withBasicAuth(username_admin_security, password_admin_security)
                 .withBasicAuth(username_lecturer_security, password_lecturer_security)
-                .withBasicAuth(username_student_security, password_student_security)
                 .postForEntity(
                 baseURL + "create",
                 lecturer,
@@ -89,7 +88,6 @@ public class LecturerControllerTest {
         ResponseEntity<Lecturer> updatedResponse = testRestTemplate
                 .withBasicAuth(username_admin_security, password_admin_security)
                 .withBasicAuth(username_lecturer_security, password_lecturer_security)
-                .withBasicAuth(username_student_security, password_student_security)
                 .postForEntity(
                 baseURL + "update",
                 lecturerUpdated,
