@@ -38,7 +38,7 @@ public class StudentControllerTest {
     public void create() {
 
         String url = baseURL + "create";
-        ResponseEntity<Student> r = restTemplate.withBasicAuth(username_admin_security, username_admin_security).postForEntity(url, s, Student.class);
+        /*only admin can create Students*/ ResponseEntity<Student> r = restTemplate.withBasicAuth(username_admin_security, username_admin_security).postForEntity(url, s, Student.class);
         assertNotNull(r);
         assertNotNull(r.getBody());
 
@@ -49,7 +49,7 @@ public class StudentControllerTest {
     @Test
     public void read() {
         String url = baseURL + "read/" + s.getStudentID();
-        ResponseEntity<Student> r = restTemplate.withBasicAuth(username_student_security, password_student_security).withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).getForEntity(url, Student.class);
+        /*everyone can read Student*/ ResponseEntity<Student> r = restTemplate.withBasicAuth(username_student_security, password_student_security).withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).getForEntity(url, Student.class);
         assertEquals(s.getStudentID(), r.getBody().getStudentID());
     }
 
@@ -57,14 +57,14 @@ public class StudentControllerTest {
     public void update() {
         Student u = new Student.Builder().copy(s).setStudentID("230").build();
         String url = baseURL + "update";
-        ResponseEntity<Student> r = restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).postForEntity(url, u, Student.class);
+        /*only admin and lecturer can Update students*/ResponseEntity<Student> r = restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).postForEntity(url, u, Student.class);
         assertEquals(s.getStudentID(), r.getBody().getStudentID());
     }
 
     @Test
     public void delete() {
         String url = baseURL + "delete/" + s.getStudentID();
-        restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).delete(url);
+        /*only admin and lecturer can Delete students*/restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).delete(url);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class StudentControllerTest {
         String url = baseURL + "all";
         HttpHeaders h = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, h);
-        ResponseEntity<String> r = restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).exchange(url, HttpMethod.GET, entity, String.class);
+        /*only admin and lecturer can getAll students*/ResponseEntity<String> r = restTemplate.withBasicAuth(username_lecturer_security, password_lecturer_security).withBasicAuth(username_admin_security, username_admin_security).exchange(url, HttpMethod.GET, entity, String.class);
 
         System.out.println(r);
         System.out.println(r.getBody());
