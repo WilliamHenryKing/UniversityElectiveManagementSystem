@@ -27,8 +27,11 @@ public class ContactControllerTest {
 
     private static Contact contact = ContactFactory.createContact("215028545@mycput.ac.za",
             "0123456789", "0987654321");
-    private static String username_spring_security = "doozy";
-    private static String password_spring_security = "doozy1";
+    private static String username_admin_security = "admin";
+    private static String password_admin_security = "psw";
+
+    private static String username_student_security = "student";
+    private static String password_student_security = "password";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -38,7 +41,8 @@ public class ContactControllerTest {
     public void a_create() {
 
         ResponseEntity<Contact> postResponse = testRestTemplate
-                .withBasicAuth(username_spring_security, password_spring_security)
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_student_security, password_student_security)
                 .postForEntity(
                 baseURL + "create",
                 contact,
@@ -55,7 +59,8 @@ public class ContactControllerTest {
     public void b_read() {
 
         ResponseEntity<Contact> showResponse = testRestTemplate
-                .withBasicAuth(username_spring_security, password_spring_security)
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_student_security, password_student_security)
                 .getForEntity(baseURL +
                 "read/" +
                 contact.getEmailAdd(),
@@ -75,13 +80,12 @@ public class ContactControllerTest {
                 .build();
 
         ResponseEntity<Contact> updatedResponse = testRestTemplate
-                .withBasicAuth(username_spring_security, password_spring_security)
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_student_security, password_student_security)
                 .postForEntity(
                 baseURL + "update",
                 contactUpdated,
                 Contact.class);
-
-        JOptionPane.showMessageDialog(null, "Testing\n"+updatedResponse.getBody().getEmailAdd());
 
         assertEquals(contact.getEmailAdd(),
                 updatedResponse.getBody().getEmailAdd());
@@ -95,7 +99,7 @@ public class ContactControllerTest {
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
         ResponseEntity<String> theResponse = testRestTemplate
-                .withBasicAuth(username_spring_security, password_spring_security)
+                .withBasicAuth(username_admin_security, password_admin_security)
                 .exchange(
                 baseURL + "all",
                 HttpMethod.GET,
@@ -110,7 +114,7 @@ public class ContactControllerTest {
     @Test
     public void e_delete() {
         testRestTemplate
-                .withBasicAuth(username_spring_security, password_spring_security)
+                .withBasicAuth(username_admin_security, password_admin_security)
                 .delete(baseURL + "delete/" + contact.getEmailAdd());
     }
 }

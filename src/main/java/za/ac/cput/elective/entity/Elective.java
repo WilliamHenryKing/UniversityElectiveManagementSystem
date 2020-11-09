@@ -19,7 +19,7 @@ public class Elective  {
     private String electName;
 
     /*No argument constructor, protected*/
-    protected Elective(){};
+    protected Elective(){}
 
     /* constructor */
     private Elective(Builder b) {

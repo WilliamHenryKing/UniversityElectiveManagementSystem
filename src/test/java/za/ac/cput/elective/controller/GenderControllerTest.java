@@ -23,6 +23,14 @@ import static org.junit.Assert.*;
 public class GenderControllerTest {
 
     private static Gender gender = new GenderFactory().createGender('F'); // creates female gender
+    private static String username_admin_security = "admin";
+    private static String password_admin_security = "psw";
+
+    private static String username_lecturer_security = "lecturer";
+    private static String password_lecturer_security = "password2";
+
+    private static String username_student_security = "student";
+    private static String password_student_security = "password";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -31,7 +39,11 @@ public class GenderControllerTest {
     @Test
     public void a_create() {
 
-        ResponseEntity<Gender> postResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Gender> postResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .withBasicAuth(username_student_security, password_student_security)
+                .postForEntity(
                 baseURL + "create",
                 gender,
                 Gender.class);
@@ -46,18 +58,16 @@ public class GenderControllerTest {
     @Test
     public void b_read() {
 
-        ResponseEntity<Gender> showResponse = testRestTemplate.getForEntity(baseURL +
-                        "read" +
+        ResponseEntity<Gender> showResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .withBasicAuth(username_student_security, password_student_security)
+                .getForEntity(baseURL +
+                        "read/" +
                         gender.getGenderID(),
                 Gender.class);
 
-        System.out.println("Expected: " + gender.getGenderID()
-                + "\nActual: " + showResponse.getBody().getGenderID());
-
         assertEquals(gender.getGenderID(), showResponse.getBody().getGenderID());
-
-        System.out.println("Expected: " + gender.getGenderID()
-                + "\nActual: " + showResponse.getBody().getGenderID());
 
     }
 
@@ -70,7 +80,11 @@ public class GenderControllerTest {
                 .setGenderID('U')
                 .build();
 
-        ResponseEntity<Gender> updatedResponse = testRestTemplate.postForEntity(
+        ResponseEntity<Gender> updatedResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .withBasicAuth(username_lecturer_security, password_lecturer_security)
+                .withBasicAuth(username_student_security, password_student_security)
+                .postForEntity(
                 baseURL + "update",
                 genderUpdated,
                 Gender.class);
@@ -86,7 +100,9 @@ public class GenderControllerTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<String> stringHttpEntity = new HttpEntity<>(null, httpHeaders);
 
-        ResponseEntity<String> theResponse = testRestTemplate.exchange(
+        ResponseEntity<String> theResponse = testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .exchange(
                 baseURL + "all",
                 HttpMethod.GET,
                 stringHttpEntity,
@@ -99,6 +115,8 @@ public class GenderControllerTest {
 
     @Test
     public void e_delete() {
-        testRestTemplate.delete(baseURL + "delete/" + gender.getGenderID());
+        testRestTemplate
+                .withBasicAuth(username_admin_security, password_admin_security)
+                .delete(baseURL + "delete/" + gender.getGenderID());
     }
 }
