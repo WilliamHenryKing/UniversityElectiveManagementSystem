@@ -41,7 +41,6 @@ public class ElectiveController {
     @GetMapping("/update")
     public Elective update (@RequestBody Elective elective){
         return  electiveService.update(elective);
-
     }
 
     @GetMapping("/all")
