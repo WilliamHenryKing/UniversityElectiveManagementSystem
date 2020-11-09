@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Lecturer {
 
     @Id
-    private long lecturerID;
+    private Long lecturerID;
 
     private String lecturerLName;
     private String lecturerFName;
@@ -29,7 +29,7 @@ public class Lecturer {
         this.genderID = builder.genderID;
     }
 
-    public long getLecturerID() {
+    public Long getLecturerID() {
         return lecturerID;
     }
 
@@ -46,7 +46,7 @@ public class Lecturer {
     }
 
     public static class Builder {
-        private long lecturerID;
+        private Long lecturerID;
         private String lecturerLName;
         private String lecturerFName;
         private char genderID;

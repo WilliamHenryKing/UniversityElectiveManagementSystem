@@ -11,6 +11,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Gender;
 import za.ac.cput.elective.entity.Lecturer;
@@ -89,12 +92,15 @@ public class LecturerControllerTest {
                 .withBasicAuth(username_admin_security, password_admin_security)
                 .withBasicAuth(username_lecturer_security, password_lecturer_security)
                 .postForEntity(
-                baseURL + "update",
+                baseURL + "update/",
                 lecturerUpdated,
                 Lecturer.class);
 
         assertEquals(lecturer.getLecturerID(),
                 updatedResponse.getBody().getLecturerID());
+
+        System.out.println(lecturer.getLecturerID() +"\n"
+                        + updatedResponse.getBody().getLecturerID());
 
     }
 
@@ -112,7 +118,7 @@ public class LecturerControllerTest {
                 stringHttpEntity,
                 String.class);
 
-        System.out.println(theResponse);
+        System.out.println(theResponse+"\n");
         System.out.println(theResponse.getBody());
 
     }
