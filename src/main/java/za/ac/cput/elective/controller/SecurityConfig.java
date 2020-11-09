@@ -28,7 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .withUser("student")
                 .password(passwordEncoder().encode("password"))
-                .roles(USER);
+                .roles(USER)
+
+                .and()
+
+                .withUser("lecturer")
+                .password(passwordEncoder().encode("password2"))
+                .roles(ADMIN);
 
     }
 
@@ -37,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "**/create", "**/delete/**").hasRole(ADMIN)
+                .antMatchers(HttpMethod.POST, "**/create", "**/delete/**", "**/update/**").hasRole(ADMIN)
                 .antMatchers(HttpMethod.GET, "**/read/**", "**/all").hasRole(USER)
                 .and()
                 .csrf().disable();

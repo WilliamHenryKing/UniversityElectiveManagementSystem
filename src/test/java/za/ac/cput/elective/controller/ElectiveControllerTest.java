@@ -3,6 +3,7 @@ package za.ac.cput.elective.controller;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.ac.cput.elective.entity.Elective;
 import za.ac.cput.elective.factory.ElectiveFactory;
-
-
 import static org.junit.Assert.*;
+
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -24,23 +25,24 @@ import static org.junit.Assert.*;
 
 public class ElectiveControllerTest {
 
-    private Elective elective = ElectiveFactory.createElective(0000155, "Data Structures");
+    private Elective elective = ElectiveFactory.createElective(0000155, "BNA");
+
+    public static String SECURITY_USERNAME = "doozy";
+    public static String SECURITY_PASSWORD = "doozy1";
+
     @Autowired
     private TestRestTemplate restTemplate;
     private String baseURL = "http://localhost:8080/elective/";
 
     @Test
-    public void a_create() {
-
+    public void create() {
         String url = baseURL + "create";
-        System.out.println("URL" + url);
-        System.out.println("Post data" + elective);
-
-        ResponseEntity<Elective> postResponse = restTemplate.postForEntity(url, elective, Elective.class);
-        assertNotNull(postResponse);
-        assertNotNull(postResponse.getBody());
-        System.out.println("Saved data:" + elective);
-        assertEquals(elective.getElectCode(), postResponse.getBody().getElectCode());
+        ResponseEntity<Elective> elect = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, elective, Elective.class);
+        assertNotNull(elective);
+        assertNotNull(elect.getBody());
+        System.out.println(elect.getBody());
     }
 
 
@@ -49,45 +51,52 @@ public class ElectiveControllerTest {
 
         String url = baseURL + "read/" + elective.getElectCode();
         System.out.println(url);
-        ResponseEntity<Elective> response = restTemplate.getForEntity(url, Elective.class);
-
+        ResponseEntity<Elective> response = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Elective.class);
         System.out.println(response.getBody());
         assertEquals(elective.getElectCode(), response.getBody().getElectCode());
-        System.out.println("READ:" +response);
+        System.out.println("Added data:" +response);
 
     }
 
     @Test
-    public void c_modify() {
+    public void c_update() {
 
-        Elective update = new Elective.Builder()
+        Elective modify;
+        modify = new Elective.Builder()
                 .copy(elective)
-                .setElectCode(0000155)
+                .setElectCode(0000120)
                 .build();
         String url = baseURL +"modify";
-        ResponseEntity<Elective> responseEntity = restTemplate.postForEntity(url, update, Elective.class);
-        assertNotNull(String.valueOf(elective.getElectCode()), responseEntity.getBody().getElectCode());
-        System.out.println("Modified..." +responseEntity.getBody());
+        ResponseEntity<Elective> responseEntity = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, modify, Elective.class);
+        assertNotNull(String.valueOf(elective.getElectCode()), responseEntity
+                .getBody()
+                .getElectCode());
+        System.out.println("Modified successfully..." + responseEntity.getBody());
+
 
     }
 
+
     @Test
-    public void d_delete(){
-        String url = baseURL + "delete/"+ "  " + elective.getElectCode() + "  and: " + elective.getElectName();
-        System.out.println("URL: " + url);
-        restTemplate.delete(url);
-        /*Works!!! it actually deletes the details created.*/
+    public void delete() {
+        String url = baseURL + "delete/" + elective.getElectCode();
+        restTemplate.withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD).delete(url);
     }
 
     @Test
-    public void getAll(){
-        String url = baseURL + "all/";
-        HttpHeaders headers= new HttpHeaders();
-        HttpEntity<String> entity = new HttpEntity<>(null,headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
-        System.out.println(response);
-        System.out.println(response.getBody());
-        /*Works!!!*/
+    public void getAll() {
+        String url = baseURL + "all";
+        HttpHeaders hHeader = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, hHeader);
+        ResponseEntity<String> rspEn = restTemplate.withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        System.out.println(rspEn);
+        System.out.println(rspEn.getBody());
     }
 
 }
