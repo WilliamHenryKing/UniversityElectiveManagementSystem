@@ -55,7 +55,7 @@ public class AdminControllerTest {
     @Test
     public void delete() {
         String url = baseURL + "delete/" + ad.getAdminID();
-        restTemplate.delete(url);
+        restTemplate.withBasicAuth(userName,secPassWord).delete(url);
     }
 
     @Test

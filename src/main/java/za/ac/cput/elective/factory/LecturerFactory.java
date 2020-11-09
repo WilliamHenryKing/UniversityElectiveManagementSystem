@@ -14,13 +14,13 @@ public class LecturerFactory {
     public static Lecturer createLecturer(long lecturerID,
                                           String lecturerLName,
                                           String lecturerFName,
-                                          Gender gender) {
+                                          char genderID) {
 
         return new Lecturer.Builder()
                 .setLecturerID(lecturerID)
                 .setLecturerLName(lecturerLName)
                 .setLecturerFName(lecturerFName)
-                .setGender(gender)
+                .setGender(genderID)
                 .build();
 
     }

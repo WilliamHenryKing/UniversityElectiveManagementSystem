@@ -18,7 +18,7 @@ public class Lecturer {
 
     private String lecturerLName;
     private String lecturerFName;
-    private Gender gender;
+    private char genderID;
 
     protected Lecturer() {}
 
@@ -26,7 +26,7 @@ public class Lecturer {
         this.lecturerID = builder.lecturerID;
         this.lecturerLName = builder.lecturerLName;
         this.lecturerFName = builder.lecturerFName;
-        this.gender = builder.gender;
+        this.genderID = builder.genderID;
     }
 
     public long getLecturerID() {
@@ -41,16 +41,15 @@ public class Lecturer {
         return lecturerFName;
     }
 
-    public Gender getGender() {
-        return gender;
+    public char getGenderID() {
+        return genderID;
     }
-
 
     public static class Builder {
         private long lecturerID;
         private String lecturerLName;
         private String lecturerFName;
-        private Gender gender;
+        private char genderID;
 
         public Builder setLecturerID(long lecturerID) {
             this.lecturerID = lecturerID;
@@ -67,8 +66,8 @@ public class Lecturer {
             return this;
         }
 
-        public Builder setGender(Gender gender) {
-            this.gender = gender;
+        public Builder setGender(char genderID) {
+            this.genderID = genderID;
             return this;
         }
 
@@ -76,7 +75,7 @@ public class Lecturer {
             this.lecturerID = lecturer.lecturerID;
             this.lecturerLName = lecturer.lecturerLName;
             this.lecturerFName = lecturer.lecturerFName;
-            this.gender = lecturer.gender;
+            this.genderID = lecturer.genderID;
             return this;
         }
 
@@ -91,7 +90,7 @@ public class Lecturer {
                 "\nLecturerID: " + lecturerID +
                 "\nLecturerLName: " + lecturerLName +
                 "\nLecturerFName: " + lecturerFName
-                + "\nGender: " + gender;
+                + "\nGender: " + genderID;
     }
 
     @Override
