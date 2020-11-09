@@ -2,6 +2,7 @@ package za.ac.cput.elective.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /*
  * @author          : Sinethemba Poni 213276968
@@ -66,6 +67,19 @@ public class Room {
             return new Room(this);
         }
 
+    }
+    
+
+    @Override
+    public  boolean equals (Object o){
+        if (this == o) return  true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return roomNum.equals(room.roomNum);
+    }
+
+    @Override
+    public int hashCode() {return Objects.hash(roomNum);
     }
 
 }
