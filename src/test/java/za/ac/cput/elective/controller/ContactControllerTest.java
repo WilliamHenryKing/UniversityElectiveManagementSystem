@@ -87,8 +87,6 @@ public class ContactControllerTest {
                 contactUpdated,
                 Contact.class);
 
-        JOptionPane.showMessageDialog(null, "Testing\n"+updatedResponse.getBody().getEmailAdd());
-
         assertEquals(contact.getEmailAdd(),
                 updatedResponse.getBody().getEmailAdd());
 

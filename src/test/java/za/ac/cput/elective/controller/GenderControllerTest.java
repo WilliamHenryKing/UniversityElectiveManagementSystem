@@ -63,17 +63,11 @@ public class GenderControllerTest {
                 .withBasicAuth(username_lecturer_security, password_lecturer_security)
                 .withBasicAuth(username_student_security, password_student_security)
                 .getForEntity(baseURL +
-                        "read" +
+                        "read/" +
                         gender.getGenderID(),
                 Gender.class);
 
-        System.out.println("Expected: " + gender.getGenderID()
-                + "\nActual: " + showResponse.getBody().getGenderID());
-
         assertEquals(gender.getGenderID(), showResponse.getBody().getGenderID());
-
-        System.out.println("Expected: " + gender.getGenderID()
-                + "\nActual: " + showResponse.getBody().getGenderID());
 
     }
 

@@ -2,6 +2,7 @@ package za.ac.cput.elective.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /**
  * Author @plex303
@@ -77,25 +78,17 @@ public class Admin {
 
     } // end of AdminBuilder class
 
-
-    // displays selected elective details
-    public void viewElectApplication(){
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin faculty = (Admin) o;
+        return adminID.equals(faculty.adminID);
     }
 
-    // adds new elective
-    public void addElective(){
-
-    }
-
-    // deletes an elective
-    public void deleteElective(){
-
-    }
-
-    // modifies elective details
-    public void modifyElective(){
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(adminID);
     }
 
 
