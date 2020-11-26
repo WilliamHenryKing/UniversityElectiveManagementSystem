@@ -1,6 +1,9 @@
 package za.ac.cput.elective.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /*
@@ -14,17 +17,19 @@ import javax.persistence.Id;
 public class Elective  {
 
     /* Encapsulation */
-    @Id
-    private long electCode;
+    //@GeneratedValue(generator = "uuid2")
+    //@GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Id// adding the
+    private String electCode;
     private String electName;
 
     /*No argument constructor, protected*/
     protected Elective(){}
 
     /* constructor */
-    private Elective(Builder b) {
-        this.electName = b.electName;
-        this.electCode = b.electCode;
+    public Elective(Builder builder) {
+        this.electName = builder.electName;
+        this.electCode = builder.electCode;
 
     }
 
@@ -33,7 +38,7 @@ public class Elective  {
         return electName;
     }
 
-    public Long getElectCode() {
+    public String getElectCode() {
         return electCode;
     }
 
@@ -50,7 +55,7 @@ public class Elective  {
     public static class Builder {
 
         private String electName;
-        private long electCode;
+        private String electCode;
 
         /* setters using builder */
         public Builder setElectName(String electName) {
@@ -58,7 +63,7 @@ public class Elective  {
             return this;
         }
 
-        public Builder setElectCode(long electCode) {
+        public Builder setElectCode(String electCode) {
             this.electCode = electCode;
             return this;
         }

@@ -11,6 +11,6 @@ import java.util.Set;
  * Date: 05/09/2020
  **/
 
-public interface ElectiveService extends IService<Elective, Long> {
+public interface ElectiveService extends IService<Elective, String> {
     Set<Elective> getAll();
 }
