@@ -37,8 +37,8 @@ public class ElectiveServiceImpl implements ElectiveService {
 
     }
 
-    @Override
-    public Elective read(Long s) {
+   @Override
+    public Elective read(String s) {
         return this.eRepo.findById(s).orElseGet(null);
     }
 
@@ -51,7 +51,7 @@ public class ElectiveServiceImpl implements ElectiveService {
     }
 
     @Override
-    public boolean delete(Long s) {
+    public boolean delete(String s) {
         this.eRepo.deleteById(s);
         return !this.eRepo.existsById(s);
     }
