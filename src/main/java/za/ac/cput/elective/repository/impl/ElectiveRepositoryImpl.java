@@ -1,62 +1,71 @@
-//package za.ac.cput.elective.repository.impl;
+/*package za.ac.cput.elective.repository.impl;
 
 
+import org.springframework.stereotype.Repository;
+import za.ac.cput.elective.entity.Elective;
+import za.ac.cput.elective.repository.ElectiveRepository;
 
-/*public class  ElectiveRepositoryImpl implements ElectiveRepository{
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-    private static ElectiveRepository eRepo = null;
+@Repository("ElectiveInMemory")
+
+public class  ElectiveRepositoryImpl implements ElectiveRepository {
+
+    private static ElectiveRepositoryImpl eRepo = null;
     private Set<Elective> electiveDB;
 
     //CONSTRUCTOR
     public ElectiveRepositoryImpl() {
         this.electiveDB = new HashSet<>();
     }
-    public static ElectiveRepository getRepository(){
+    public static ElectiveRepositoryImpl getElectiveRepository(){
         if (eRepo == null){
-            eRepo = new ElectiveRepositoryImpl();
+            return new ElectiveRepositoryImpl();
         }
-
         return eRepo;
     }
 
-    /*create, read, update, and delete methods*/
+    //create, read, update, and delete methods
 
-    /*CREATE METHOD
+    //CREATE METHOD
     public Elective create(Elective elective){
         this.electiveDB.add(elective);
         return elective;
     }
     //READ METHOD
-    public Elective read(String electName){
-        Elective elective = null;
-        for(Elective elec: this.electiveDB) {
-
-            if(elec.getElectName().equalsIgnoreCase(electName)){
-                elective = elec;
-                break;
-            } //end of if statement
-        }//end of the for loop
-        return elective;
+    public Elective read(String electCode){
+        return electiveDB.stream().filter(elective -> elective
+                .getElectCode()
+                .equals(electCode))
+                .findAny()
+                .orElse(null);
     }
-    //UPDATE METHOD*/
-   /* public Elective update(Elective elective){
-        Elective oldElective = read(elective.getElectCode()+elective.getElectName());
-        if(oldElective != null){
-            this.electiveDB.remove(oldElective);
-            this.electiveDB.add(elective);
-        }//end of if statement
-        return elective;
+    //UPDATE METHOD
+    //@Override
+    public Elective update(Elective elective) {
+
+        Elective inDB = read(elective.getElectCode());
+
+        if(inDB != null){
+            electiveDB.remove(inDB);
+            electiveDB.add(elective);
+            return elective;
+        }
+
+        return null;
     }//end of the UPDATE method
 
     //DELETE METHOD/
-    public boolean delete(String electName){
-        Elective elective = read(electName);
-        if(elective != null) this.electiveDB.remove(elective);{
-        }
-        return false;
+    //@Override
+    public void delete(String electCode) {
+
+        Elective inDB = read(electCode);
+        electiveDB.remove(inDB);
     }//end of delete method
 
-    @Override
+    //@Override
     public Set<Elective> getAll() {
         return electiveDB;
     }

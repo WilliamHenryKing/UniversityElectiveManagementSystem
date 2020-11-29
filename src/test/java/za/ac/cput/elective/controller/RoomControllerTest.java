@@ -25,8 +25,15 @@ public class RoomControllerTest {
 
     private static Room room = RoomFactory.createRoom("Room one", 34);
 
-    public static String SECURITY_USERNAME = "doozy";
-    public static String SECURITY_PASSWORD = "doozy1";
+    public static String USERNAME_ADMIN_SECURITY = "admin";
+    public static String PASSWORD_ADMIN_SECURITY = "psw";
+
+    public static String USERNAME_STUDENT_SECURITY = "student";
+    public static String PASSWORD_STUDENT_SECURITY = "password2";
+
+    public static String USERNAME_LECTURER_SECURITY = "lecturer";
+    public static String PASSWORD_LECTURER_SECURITY = "password";
+
 
 
     @Autowired
@@ -41,7 +48,7 @@ public class RoomControllerTest {
                 System.out.println("Post data" + room);
 
                 ResponseEntity<Room> postResponse = restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                        .withBasicAuth(USERNAME_ADMIN_SECURITY, PASSWORD_ADMIN_SECURITY)
                 .postForEntity(url, room, Room.class);
 
 
@@ -58,7 +65,10 @@ public class RoomControllerTest {
                 String url = baseURL + "read/" +room.getRoomNum();
                 System.out.println(url);
                 ResponseEntity<Room> response = restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+
+                .withBasicAuth(USERNAME_ADMIN_SECURITY, PASSWORD_ADMIN_SECURITY)
+                        .withBasicAuth(USERNAME_LECTURER_SECURITY, PASSWORD_LECTURER_SECURITY)
+                        .withBasicAuth(USERNAME_STUDENT_SECURITY, PASSWORD_STUDENT_SECURITY)
                 .getForEntity(url, Room.class);
 
                 System.out.println(response.getBody());
@@ -73,7 +83,7 @@ public class RoomControllerTest {
                 Room update = new Room.Builder().copy(room).setRoomNum("Room 1").build();
                 String url = baseURL +"update";
                 ResponseEntity<Room> responseEntity = restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth(USERNAME_ADMIN_SECURITY, PASSWORD_ADMIN_SECURITY)
                 .postForEntity(url, update, Room.class);
                 assertNotNull(room.getRoomNum(), responseEntity.getBody().getRoomNum());
                 System.out.println("Successfully updated..." +responseEntity.getBody());
@@ -88,7 +98,7 @@ public class RoomControllerTest {
                 HttpHeaders hHeades = new HttpHeaders();
                 HttpEntity<String> entity = new HttpEntity<>(null, hHeades);
                 ResponseEntity<String> response = restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth(USERNAME_ADMIN_SECURITY, PASSWORD_ADMIN_SECURITY)
                 .exchange(url, HttpMethod.GET, entity, String.class);
 
                 System.out.println(response);
@@ -100,7 +110,7 @@ public class RoomControllerTest {
     public void f_delete() {
                 String url = baseURL + "delete/" + room.getRoomNum();
                 restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth(USERNAME_ADMIN_SECURITY, PASSWORD_ADMIN_SECURITY)
                 .delete(url);
 
     }

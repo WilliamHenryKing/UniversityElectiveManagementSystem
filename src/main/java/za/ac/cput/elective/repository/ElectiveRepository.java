@@ -12,6 +12,6 @@ import java.util.Set;
  **/
 
 @Repository
-public interface ElectiveRepository extends JpaRepository<Elective, Long> {
+public interface ElectiveRepository extends JpaRepository<Elective, String> {
 
 }
