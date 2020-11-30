@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 
 public class ElectiveControllerTest {
 
-    private Elective elective = ElectiveFactory.createElective(0000155, "BNA");
+    private Elective elective = ElectiveFactory.createElective("0000155", "BNA");
 
     public static String SECURITY_USERNAME = "doozy";
     public static String SECURITY_PASSWORD = "doozy1";
@@ -66,7 +66,7 @@ public class ElectiveControllerTest {
         Elective modify;
         modify = new Elective.Builder()
                 .copy(elective)
-                .setElectCode(0000120)
+                .setElectCode("0000120")
                 .build();
         String url = baseURL +"modify";
         ResponseEntity<Elective> responseEntity = restTemplate
